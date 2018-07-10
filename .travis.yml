@@ -1,0 +1,8 @@
+os: linux
+dist: trusty
+sudo: false
+git:
+  depth: 1
+language: go
+go: "1.10"
+script: make ci
