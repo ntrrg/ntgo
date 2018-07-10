@@ -1,7 +1,6 @@
 // Copyright 2018 Miguel Angel Rivera Notararigo. All rights reserved.
 // This source code was released under the MIT license.
 
-// Package arithmetic provides arithmetics operations for any type.
 package arithmetic
 
 // Identity constants
@@ -18,15 +17,44 @@ type Operander interface {
 }
 
 // Add gets any number of Operander and returns their addition.
-func Add(operands ...Operander) float64 {
-	result := float64(0)
+func Add(o ...Operander) float64 {
+	result := o[0].Val()
 
-	for _, v := range operands {
-		if v.Val() == AdditiveIdentity {
-			continue
-		}
-
+	for _, v := range o[1:] {
 		result += v.Val()
+	}
+
+	return result
+}
+
+// Div gets any number of Operander and returns their division.
+func Div(o ...Operander) float64 {
+	result := o[0].Val()
+
+	for _, v := range o[1:] {
+		result /= v.Val()
+	}
+
+	return result
+}
+
+// Mul gets any number of Operander and returns their multiplication.
+func Mul(o ...Operander) float64 {
+	result := o[0].Val()
+
+	for _, v := range o[1:] {
+		result *= v.Val()
+	}
+
+	return result
+}
+
+// Sub gets any number of Operander and returns their subtraction.
+func Sub(o ...Operander) float64 {
+	result := o[0].Val()
+
+	for _, v := range o[1:] {
+		result -= v.Val()
 	}
 
 	return result
