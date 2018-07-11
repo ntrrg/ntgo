@@ -1,0 +1,7 @@
+image: golang:1.10.3-alpine
+before_script:
+  - apk update && apk add --no-cache git make
+  - make deps
+test:
+  script:
+    - make ci

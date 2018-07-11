@@ -1,6 +1,9 @@
 [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo?status.svg)](https://godoc.org/github.com/ntrrg/ntgo)
 [![goreport](https://goreportcard.com/badge/github.com/ntrrg/ntgo)](https://goreportcard.com/report/github.com/ntrrg/ntgo) 
 [![BCH compliance](https://bettercodehub.com/edge/badge/ntrrg/ntgo?branch=master)](https://bettercodehub.com/results/ntrrg/ntgo)
+[![Travis build btatus](https://travis-ci.com/ntrrg/ntgo.svg?branch=master)](https://travis-ci.com/ntrrg/ntgo)
+[![Gitlab build btatus](https://gitlab.com/ntrrg/ntgo/badges/master/pipeline.svg)](https://gitlab.com/ntrrg/ntgo/commits/master)
+[![Drone build status](https://ci.nt.web.ve/api/badges/ntrrg/ntgo/status.svg)](https://ci.nt.web.ve/ntrrg/ntgo)
 
 `math`:
 
