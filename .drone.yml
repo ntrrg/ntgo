@@ -4,8 +4,6 @@ clone:
     depth: 1
 pipeline:
   test:
-    image: golang:1.10.3-alpine
+    image: ntrrg/ntgo
     commands:
-      - apk update && apk add --no-cache git make
-      - make deps
       - make ci
