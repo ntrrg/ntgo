@@ -8,7 +8,7 @@ import (
 	nthttp "github.com/ntrrg/ntgo/net/http"
 )
 
-func benchmarkChainHandlers_creation(n int, b *testing.B) {
+func benchmarkChainHandlers(n int, b *testing.B) {
 	h := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("hello, world"))
 	})
@@ -26,10 +26,10 @@ func benchmarkChainHandlers_creation(n int, b *testing.B) {
 	}
 }
 
-func BenchmarkChainHandlers_creation(b *testing.B)      { benchmarkChainHandlers_creation(1, b) }
-func BenchmarkChainHandlers_creation_10(b *testing.B)   { benchmarkChainHandlers_creation(10, b) }
-func BenchmarkChainHandlers_creation_100(b *testing.B)  { benchmarkChainHandlers_creation(100, b) }
-func BenchmarkChainHandlers_creation_1000(b *testing.B) { benchmarkChainHandlers_creation(1000, b) }
+func BenchmarkChainHandlers(b *testing.B)      { benchmarkChainHandlers(1, b) }
+func BenchmarkChainHandlers_10(b *testing.B)   { benchmarkChainHandlers(10, b) }
+func BenchmarkChainHandlers_100(b *testing.B)  { benchmarkChainHandlers(100, b) }
+func BenchmarkChainHandlers_1000(b *testing.B) { benchmarkChainHandlers(1000, b) }
 
 // Adapter pattern
 
@@ -54,7 +54,7 @@ func SetHeaderAdapter(key, value string) Adapter {
 	}
 }
 
-func benchmarkAdapter_creation(n int, b *testing.B) {
+func benchmarkAdapter(n int, b *testing.B) {
 	h := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("hello, world"))
 	})
@@ -70,7 +70,7 @@ func benchmarkAdapter_creation(n int, b *testing.B) {
 	}
 }
 
-func BenchmarkAdapter_creation(b *testing.B)      { benchmarkAdapter_creation(1, b) }
-func BenchmarkAdapter_creation_10(b *testing.B)   { benchmarkAdapter_creation(10, b) }
-func BenchmarkAdapter_creation_100(b *testing.B)  { benchmarkAdapter_creation(100, b) }
-func BenchmarkAdapter_creation_1000(b *testing.B) { benchmarkAdapter_creation(1000, b) }
+func BenchmarkAdapter(b *testing.B)      { benchmarkAdapter(1, b) }
+func BenchmarkAdapter_10(b *testing.B)   { benchmarkAdapter(10, b) }
+func BenchmarkAdapter_100(b *testing.B)  { benchmarkAdapter(100, b) }
+func BenchmarkAdapter_1000(b *testing.B) { benchmarkAdapter(1000, b) }
