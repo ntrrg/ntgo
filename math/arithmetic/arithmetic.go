@@ -16,7 +16,7 @@ type Operander interface {
 	Val() float64
 }
 
-// Add gets any number of Operander and returns their addition.
+// Add gets any number of Operanders and returns their addition.
 func Add(o ...Operander) float64 {
 	result := o[0].Val()
 
@@ -27,7 +27,7 @@ func Add(o ...Operander) float64 {
 	return result
 }
 
-// Div gets any number of Operander and returns their division.
+// Div gets any number of Operanders and returns their division.
 func Div(o ...Operander) float64 {
 	result := o[0].Val()
 
@@ -38,7 +38,7 @@ func Div(o ...Operander) float64 {
 	return result
 }
 
-// Mul gets any number of Operander and returns their multiplication.
+// Mul gets any number of Operanders and returns their multiplication.
 func Mul(o ...Operander) float64 {
 	result := o[0].Val()
 
@@ -49,7 +49,7 @@ func Mul(o ...Operander) float64 {
 	return result
 }
 
-// Sub gets any number of Operander and returns their subtraction.
+// Sub gets any number of Operanders and returns their subtraction.
 func Sub(o ...Operander) float64 {
 	result := o[0].Val()
 

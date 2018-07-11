@@ -7,7 +7,7 @@ import (
 	a "github.com/ntrrg/ntgo/math/arithmetic"
 )
 
-// Operand is a simple string implementation of Operander and SelfOperander.
+// Operand is a simple string implementation of Operander.
 type Operand string
 
 func (o Operand) Val() float64 {
