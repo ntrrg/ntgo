@@ -13,22 +13,25 @@ build:
 
 .PHONY: build-docker
 build-docker:
-	docker build  .
+	docker build -t ntrrg/ntgo  .
 
 .PHONY: ci
-ci: test qa lint-go coverage benchmark
+ci: test lint-go qa coverage benchmark
 
 .PHONY: clean
 clean:
 	rm -f $(coverage_results)
+	docker rm -f ntrrg/ntgo || true
 
 .PHONY: coverage
-coverage: $(coverage_results)
-	go tool cover -func $<
+coverage:
+	@go test -covermode count -coverprofile $(coverage_results) ./... > /dev/null
+	go tool cover -func $(coverage_results)
 
 .PHONY: coverage-web
-coverage-web: $(coverage_results)
-	go tool cover -html $<
+coverage-web:
+	@go test -covermode count -coverprofile $(coverage_results) ./... > /dev/null
+	go tool cover -html $(coverage_results)
 
 .PHONY: deps
 deps:
@@ -55,7 +58,7 @@ lint: lint-md lint-go
 .PHONY: lint-go
 lint-go: deps
 	gofmt -d -e -s $(gofiles)
-	golint ./...
+	gometalinter.v2 --fast ./...
 
 .PHONY: lint-md
 lint-md:
@@ -68,8 +71,4 @@ qa: deps
 .PHONY: test
 test:
 	go test -v ./...
-
-$(coverage_results): $(go_files)
-	@mkdir -p $$(dirname $@)
-	@go test -covermode count -coverprofile $@ ./... > /dev/null
 
