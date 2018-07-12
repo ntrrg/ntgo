@@ -13,13 +13,11 @@ import (
 // See common_test.go
 
 func benchmarkAdd(n int, b *testing.B) {
-	o := make([]Operand, n)
+	operanders := make([]interface{}, n)
 
-	for i := 0; i < n; i++ {
-		o[i] = Operand(fmt.Sprintf("%b", i))
+	for i := range operanders {
+		operanders[i] = i
 	}
-
-	operanders := Operanders(o)
 
 	for i := 0; i <= b.N; i++ {
 		a.Add(operanders...)

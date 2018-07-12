@@ -19,17 +19,20 @@ type testCase struct {
 type testCases []testCase
 
 func TestAdd(t *testing.T) {
-	cases := testCases{
-		{[]Operand{"a", "b"}, 2},
-		{[]Operand{"abc", "lmn", "xyz"}, 9},
-		{[]Operand{"hello", ", ", "world", "!"}, 13},
-		{[]Operand{"ma", ""}, 2},
-		{[]Operand{"", "rn"}, 2},
-		{[]Operand{"", ""}, 0},
+	cases := []struct {
+		in   []interface{}
+		want float64
+	}{
+		{[]interface{}{1, "b"}, 2},
+		{[]interface{}{"abc", "lmn", "xyz"}, 9},
+		{[]interface{}{"hello", ", ", "world", "!"}, 13},
+		{[]interface{}{"ma", ""}, 2},
+		{[]interface{}{"", "rn"}, 2},
+		{[]interface{}{"", ""}, 0},
 	}
 
 	for _, c := range cases {
-		got := a.Add(Operanders(c.in)...)
+		got := a.Add(c.in...)
 
 		if got != c.want {
 			t.Errorf("Add(%q) == %v, want %v", c.in, got, c.want)

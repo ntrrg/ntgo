@@ -4,12 +4,12 @@
 /*
 Package arithmetic provides arithmetic operations for any type.
 
-A simple implementation cloud be:
+A simple custom implementation cloud be:
 
 	type Operand string
 
 	func (o Operand) Val() float64 {
-		return float64(len(o))
+		return float64(len(o)) / 2
 	}
 */
 package arithmetic
