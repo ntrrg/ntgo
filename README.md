@@ -1,18 +1,9 @@
-**QA:**
-[![goreport](https://goreportcard.com/badge/github.com/ntrrg/ntgo)](https://goreportcard.com/report/github.com/ntrrg/ntgo) 
-[![BCH compliance](https://bettercodehub.com/edge/badge/ntrrg/ntgo?branch=master)](https://bettercodehub.com/results/ntrrg/ntgo)
-[![GoDoc](https://godoc.org/github.com/ntrrg/ntgo?status.svg)](https://godoc.org/github.com/ntrrg/ntgo)
-
-**CI:**
 [![Travis build btatus](https://travis-ci.com/ntrrg/ntgo.svg?branch=master)](https://travis-ci.com/ntrrg/ntgo)
 [![Gitlab build btatus](https://gitlab.com/ntrrg/ntgo/badges/master/pipeline.svg)](https://gitlab.com/ntrrg/ntgo/commits/master)
 [![Drone build status](https://ci.nt.web.ve/api/badges/ntrrg/ntgo/status.svg)](https://ci.nt.web.ve/ntrrg/ntgo)
-
-**Docker:**
-[![Docker Build Status](https://img.shields.io/docker/build/ntrrg/ntgo.svg)](https://store.docker.com/community/images/ntrrg/ntgo/)
-[![MicroBadger Size](https://img.shields.io/microbadger/image-size/ntrrg/ntgo.svg)](https://microbadger.com/images/ntrrg/ntgo)
-
-**Packages:**
+[![goreport](https://goreportcard.com/badge/github.com/ntrrg/ntgo)](https://goreportcard.com/report/github.com/ntrrg/ntgo) 
+[![BCH compliance](https://bettercodehub.com/edge/badge/ntrrg/ntgo?branch=master)](https://bettercodehub.com/results/ntrrg/ntgo)
+[![GoDoc](https://godoc.org/github.com/ntrrg/ntgo?status.svg)](https://godoc.org/github.com/ntrrg/ntgo)
 
 `math`:
 
@@ -42,9 +33,9 @@ $ go get -u github.com/ntrrg/ntgo/...
 $ go get -u github.com/ntrrg/ntgo/math/arithmetic
 ```
 
-## Features
+## Contributing
 
-See <https://godoc.org/github.com/ntrrg/ntgo>.
+See the [contribution guide](CONTRIBUTING.md) for more information.
 
 ## Uninstall
 
@@ -69,7 +60,7 @@ $ go clean -i github.com/ntrrg/ntgo/math/arithmetic
 ```
 
 ```shell-session
-$ # Si solo se había instalado el paquete a eliminar
+$ # If only this was installed
 $ rm -rf $GOPATH/github.com/ntrrg/ntgo
 ```
 
