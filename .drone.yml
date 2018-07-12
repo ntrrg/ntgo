@@ -1,9 +1,12 @@
+workspace:
+  base: /go
 clone:
   git:
     image: plugins/git
     depth: 1
 pipeline:
   test:
-    image: ntrrg/ntgo
+    image: golang:1.10.3-alpine
     commands:
+      - make deps
       - make ci

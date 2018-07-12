@@ -1,4 +1,7 @@
-image: ntrrg/ntgo
+image: golang:1.10.3-alpine
+variables:
+  CI_PROJECT_DIR: /go/src/github.com/ntrrg/ntgo
 test:
   script:
+    - make deps
     - make ci

@@ -66,7 +66,7 @@ lint-md:
 
 .PHONY: qa
 qa: deps
-	gometalinter.v2 ./...
+	CGO_ENABLED=0 gometalinter.v2 ./...
 
 .PHONY: test
 test:
