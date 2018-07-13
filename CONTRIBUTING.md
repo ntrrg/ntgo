@@ -37,12 +37,7 @@ are a tester.
 ## As developer
 
 [![Docker Build Status](https://img.shields.io/docker/build/ntrrg/ntgo.svg)](https://store.docker.com/community/images/ntrrg/ntgo/)
-
-&nbsp;&nbsp;`latest`:
 [![MicroBadger Size](https://img.shields.io/microbadger/image-size/ntrrg/ntgo.svg)](https://microbadger.com/images/ntrrg/ntgo)
-
-&nbsp;&nbsp;`slim`:
-[![MicroBadger Size](https://img.shields.io/microbadger/image-size/ntrrg/ntgo/slim.svg)](https://microbadger.com/images/ntrrg/ntgo:slim)
 
 <https://chris.beams.io/posts/git-commit/>
 
