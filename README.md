@@ -8,7 +8,7 @@
 `math`:
 
 &nbsp;&nbsp;`arithmetic`:
-![API status](https://img.shields.io/badge/status-stable-brightgreen.svg)
+![API status](https://img.shields.io/badge/status-testing-yellow.svg)
 [![gocover](http://gocover.io/_badge/github.com/ntrrg/math/arithmetic)](https://gocover.io/github.com/ntrrg/ntgo/math/arithmetic)
 [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/math/arithmetic?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/math/arithmetic)
 

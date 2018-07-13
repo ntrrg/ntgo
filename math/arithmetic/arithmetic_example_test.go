@@ -6,39 +6,37 @@ package arithmetic_test
 import (
 	"fmt"
 
-	a "github.com/ntrrg/ntgo/math/arithmetic"
+	"github.com/ntrrg/ntgo/math/arithmetic"
 )
 
-// See common_test.go
-
-func ExampleAdd() {
-	var x, y Operand = "a", "b"
-
-	r := a.Add(x, y)
-	fmt.Println(r)
-	// Output: 2
-}
-
-func ExampleDiv() {
-	var x, y Operand = "abcdef", "xy"
-
-	r := a.Div(x, y)
+func Example() {
+	x := arithmetic.Add("Miguel", "Angel", arithmetic.Sub(5, []int{1, 2, 3}))
+	y := arithmetic.Mul(2, "four") + arithmetic.Div(6, "two")
+	r := x - y
 	fmt.Println(r)
 	// Output: 3
 }
 
-func ExampleMul() {
-	var x, y Operand = "abc", "xyz"
-
-	r := a.Mul(x, y)
+func ExampleAdd() {
+	r := arithmetic.Add(true, false)
 	fmt.Println(r)
-	// Output: 9
+	// Output: 1
+}
+
+func ExampleDiv() {
+	r := arithmetic.Div(12, 6.0)
+	fmt.Println(r)
+	// Output: 2
+}
+
+func ExampleMul() {
+	r := arithmetic.Mul(1+2i, func() {})
+	fmt.Println(r)
+	// Output: 0
 }
 
 func ExampleSub() {
-	var x, y Operand = "aeiou", "bcdfg"
-
-	r := a.Sub(x, y)
+	r := arithmetic.Sub([3]string{"hello", ", ", "world!"}, []int{1, 2})
 	fmt.Println(r)
-	// Output: 0
+	// Output: 1
 }

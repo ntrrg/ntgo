@@ -6,6 +6,9 @@ package arithmetic
 import "reflect"
 
 // Operander is the interface that wraps the arithmetic representation method.
+// Is useful for adding custom behavior to named types when GetVal processes
+// it, other wise, the underlying type is obtained and follows the extraction
+// rules.
 //
 // Val returns the variable's arithmetic representation (float64).
 type Operander interface {
@@ -14,10 +17,10 @@ type Operander interface {
 
 // Add gets any number of elements and returns their addition.
 func Add(operanders ...interface{}) float64 {
-	result := getValue(operanders[0])
+	result := GetVal(operanders[0])
 
 	for _, v := range operanders[1:] {
-		result += getValue(v)
+		result += GetVal(v)
 	}
 
 	return result
@@ -25,10 +28,10 @@ func Add(operanders ...interface{}) float64 {
 
 // Div gets any number of elements and returns their division.
 func Div(operanders ...interface{}) float64 {
-	result := getValue(operanders[0])
+	result := GetVal(operanders[0])
 
 	for _, v := range operanders[1:] {
-		result /= getValue(v)
+		result /= GetVal(v)
 	}
 
 	return result
@@ -36,10 +39,10 @@ func Div(operanders ...interface{}) float64 {
 
 // Mul gets any number of elements and returns their multiplication.
 func Mul(operanders ...interface{}) float64 {
-	result := getValue(operanders[0])
+	result := GetVal(operanders[0])
 
 	for _, v := range operanders[1:] {
-		result *= getValue(v)
+		result *= GetVal(v)
 	}
 
 	return result
@@ -47,16 +50,18 @@ func Mul(operanders ...interface{}) float64 {
 
 // Sub gets any number of elements and returns their subtraction.
 func Sub(operanders ...interface{}) float64 {
-	result := getValue(operanders[0])
+	result := GetVal(operanders[0])
 
 	for _, v := range operanders[1:] {
-		result -= getValue(v)
+		result -= GetVal(v)
 	}
 
 	return result
 }
 
-func getValue(operander interface{}) float64 {
+// GetVal extracts the arithmetic representation from any type. It is ruled by
+// the value extraction rules.
+func GetVal(operander interface{}) float64 {
 	if x, ok := operander.(Operander); ok {
 		return x.Val()
 	}
@@ -74,8 +79,13 @@ func getValue(operander interface{}) float64 {
 		return float64(x.Uint())
 	case reflect.Float32, reflect.Float64:
 		return x.Float()
+	case reflect.Complex64, reflect.Complex128:
+		y := x.Complex()
+		return real(y) + imag(y)
 	case reflect.Array, reflect.Chan, reflect.Map, reflect.Slice, reflect.String:
 		return float64(x.Len())
+	case reflect.Struct:
+		return float64(x.NumField())
 	}
 
 	return 0

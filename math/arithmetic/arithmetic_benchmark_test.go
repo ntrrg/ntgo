@@ -4,84 +4,49 @@
 package arithmetic_test
 
 import (
-	"fmt"
 	"testing"
 
-	a "github.com/ntrrg/ntgo/math/arithmetic"
+	"github.com/ntrrg/ntgo/math/arithmetic"
 )
 
-// See common_test.go
+// For BytesSum see operander_example_test.go
 
-func benchmarkAdd(n int, b *testing.B) {
-	operanders := make([]interface{}, n)
-
-	for i := range operanders {
-		operanders[i] = i
+func BenchmarkGetVal(b *testing.B) {
+	cases := []struct {
+		name string
+		val  interface{}
+	}{
+		{"Operander", BytesSum("hello")},
+		{"Bool", true},
+		{"Int", int(1)},
+		{"Int8", int8(2)},
+		{"Int16", int16(3)},
+		{"Int32", int32(4)},
+		{"Int64", int64(5)},
+		{"Uint", uint(6)},
+		{"Uint8", uint8(7)},
+		{"Uint16", uint16(8)},
+		{"Uint32", uint32(9)},
+		{"Uint64", uint64(10)},
+		{"Float32", float32(11.12e3)},
+		{"Float64", float64(14.15e-6)},
+		{"Complex64", complex64(17 + 18i)},
+		{"Complex128", complex128(19 - 20i)},
+		{"Array", [3]int{21, 22, 23}},
+		{"Channel", make(chan<- string)},
+		{"Map", map[string]int{"24": 25, "26": 27, "28": 29}},
+		{"Slice", []int{30, 31, 32, 33, 34}},
+		{"String", "hello, world!"},
+		{"Function", func() {}},
 	}
 
-	for i := 0; i <= b.N; i++ {
-		a.Add(operanders...)
-	}
-}
+	for _, c := range cases {
+		c := c
 
-func BenchmarkAdd_2(b *testing.B)    { benchmarkAdd(2, b) }
-func BenchmarkAdd_20(b *testing.B)   { benchmarkAdd(20, b) }
-func BenchmarkAdd_200(b *testing.B)  { benchmarkAdd(200, b) }
-func BenchmarkAdd_2000(b *testing.B) { benchmarkAdd(2000, b) }
-
-func benchmarkDiv(n int, b *testing.B) {
-	o := make([]Operand, n)
-
-	for i := 0; i < n; i++ {
-		o[i] = Operand(fmt.Sprintf("%b", i))
-	}
-
-	operanders := Operanders(o)
-
-	for i := 0; i <= b.N; i++ {
-		a.Div(operanders...)
-	}
-}
-
-func BenchmarkDiv_2(b *testing.B)    { benchmarkDiv(2, b) }
-func BenchmarkDiv_20(b *testing.B)   { benchmarkDiv(20, b) }
-func BenchmarkDiv_200(b *testing.B)  { benchmarkDiv(200, b) }
-func BenchmarkDiv_2000(b *testing.B) { benchmarkDiv(2000, b) }
-
-func benchmarkMul(n int, b *testing.B) {
-	o := make([]Operand, n)
-
-	for i := 0; i < n; i++ {
-		o[i] = Operand(fmt.Sprintf("%b", i))
-	}
-
-	operanders := Operanders(o)
-
-	for i := 0; i <= b.N; i++ {
-		a.Mul(operanders...)
+		b.Run(c.name, func(b *testing.B) {
+			for i := 0; i <= b.N; i++ {
+				arithmetic.GetVal(c.val)
+			}
+		})
 	}
 }
-
-func BenchmarkMul_2(b *testing.B)    { benchmarkMul(2, b) }
-func BenchmarkMul_20(b *testing.B)   { benchmarkMul(20, b) }
-func BenchmarkMul_200(b *testing.B)  { benchmarkMul(200, b) }
-func BenchmarkMul_2000(b *testing.B) { benchmarkMul(2000, b) }
-
-func benchmarkSub(n int, b *testing.B) {
-	o := make([]Operand, n)
-
-	for i := 0; i < n; i++ {
-		o[i] = Operand(fmt.Sprintf("%b", i))
-	}
-
-	operanders := Operanders(o)
-
-	for i := 0; i <= b.N; i++ {
-		a.Sub(operanders...)
-	}
-}
-
-func BenchmarkSub_2(b *testing.B)    { benchmarkSub(2, b) }
-func BenchmarkSub_20(b *testing.B)   { benchmarkSub(20, b) }
-func BenchmarkSub_200(b *testing.B)  { benchmarkSub(200, b) }
-func BenchmarkSub_2000(b *testing.B) { benchmarkSub(2000, b) }
