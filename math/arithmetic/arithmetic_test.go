@@ -37,7 +37,7 @@ func TestGetVal(t *testing.T) {
 		{map[string]int{"24": 25, "26": 27, "28": 29}, 3},
 		{[]int{30, 31, 32, 33, 34}, 5},
 		{"hello, world!", 13},
-		{struct{name string}{"Miguel"}, 1},
+		{struct{ name string }{"Miguel"}, 1},
 		{'M', 77},
 		{'😄', 128516},
 		{false, 0},

@@ -10,7 +10,11 @@ import (
 
 func benchmarkChainHandlers(n int, b *testing.B) {
 	h := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("hello, world"))
+		_, err := w.Write([]byte("hello, world"))
+
+		if err != nil {
+			panic(err)
+		}
 	})
 
 	la := make([]http.Handler, n)
@@ -56,7 +60,11 @@ func SetHeaderAdapter(key, value string) Adapter {
 
 func benchmarkAdapter(n int, b *testing.B) {
 	h := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("hello, world"))
+		_, err := w.Write([]byte("hello, world"))
+
+		if err != nil {
+			panic(err)
+		}
 	})
 
 	la := make([]Adapter, n)
