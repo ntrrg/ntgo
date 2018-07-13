@@ -58,7 +58,7 @@ lint: lint-md lint-go
 .PHONY: lint-go
 lint-go: deps
 	gofmt -d -e -s $(gofiles)
-	gometalinter.v2 --fast ./...
+	gometalinter.v2 --tests --fast ./...
 
 .PHONY: lint-md
 lint-md:
@@ -66,7 +66,7 @@ lint-md:
 
 .PHONY: qa
 qa: deps
-	CGO_ENABLED=0 gometalinter.v2 ./...
+	CGO_ENABLED=0 gometalinter.v2 --tests ./...
 
 .PHONY: test
 test:
