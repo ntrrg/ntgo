@@ -1,4 +1,4 @@
-include config.mk
+gofiles := $(shell find . -iname "*.go" -type f)
 
 .PHONY: all
 all: build
@@ -16,22 +16,21 @@ build-docker:
 	docker build -t ntrrg/ntgo  .
 
 .PHONY: ci
-ci: test lint-go qa coverage benchmark
+ci: test lint qa coverage benchmark
 
 .PHONY: clean
 clean:
-	rm -f $(coverage_results)
-	docker rm -f ntrrg/ntgo || true
+	rm -f coverage.out
 
 .PHONY: coverage
 coverage:
-	@go test -covermode count -coverprofile $(coverage_results) ./... > /dev/null
-	go tool cover -func $(coverage_results)
+	@go test -covermode count -coverprofile coverage.out ./... > /dev/null
+	go tool cover -func coverage.out
 
 .PHONY: coverage-web
 coverage-web:
-	@go test -covermode count -coverprofile $(coverage_results) ./... > /dev/null
-	go tool cover -html $(coverage_results)
+	@go test -covermode count -coverprofile coverage.out ./... > /dev/null
+	go tool cover -html coverage.out
 
 .PHONY: deps
 deps:
@@ -53,16 +52,13 @@ install:
 	go install -i ./...
 
 .PHONY: lint
-lint: lint-md lint-go
-
-.PHONY: lint-go
-lint-go: deps
+lint: deps
 	gofmt -d -e -s $(gofiles)
 	gometalinter.v2 --tests --fast ./...
 
 .PHONY: lint-md
 lint-md:
-	@docker run --rm -itv "$$PWD":/files/ $(mdlinter_image)
+	@docker run --rm -itv "$$PWD":/files/ ntrrg/md-linter
 
 .PHONY: qa
 qa: deps
