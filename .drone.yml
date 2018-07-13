@@ -4,12 +4,9 @@ clone:
     depth: 1
 pipeline:
   test:
-    image: golang:1.10.3-alpine
+    image: ntrrg/ntgo
     commands:
-      - apk update && apk add git make
-      - export BASEDIR="$(go env GOPATH)/src/github.com/ntrrg"
-      - mkdir -p "$BASEDIR"
-      - ln -sf "$PWD" "$BASEDIR/ntgo"
-      - cd "$BASEDIR/ntgo"
-      - make deps
+      - export PACKAGE="$(go env GOPATH)/src/github.com/ntrrg/ntgo"
+      - ln -sf "$PWD" "$PACKAGE"
+      - cd "$PACKAGE"
       - make ci

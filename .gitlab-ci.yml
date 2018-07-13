@@ -1,11 +1,7 @@
-image: golang:1.10.3-alpine
-before_script:
-  - apk update && apk add git make
+image: ntrrg/ntgo
 test:
   script:
-    - export BASEDIR="$(go env GOPATH)/src/github.com/ntrrg"
-    - mkdir -p "$BASEDIR"
-    - ln -sf "$PWD" "$BASEDIR/ntgo"
-    - cd "$BASEDIR/ntgo"
-    - make deps
+    - export PACKAGE="$(go env GOPATH)/src/github.com/ntrrg/ntgo"
+    - ln -sf "$PWD" "$PACKAGE"
+    - cd "$PACKAGE"
     - make ci
