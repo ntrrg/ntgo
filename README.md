@@ -33,10 +33,6 @@ $ go get -u github.com/ntrrg/ntgo/...
 $ go get -u github.com/ntrrg/ntgo/math/arithmetic
 ```
 
-## Contributing
-
-See the [contribution guide](CONTRIBUTING.md) for more information.
-
 ## Uninstall
 
 **All the packages:**
@@ -63,6 +59,10 @@ $ go clean -i github.com/ntrrg/ntgo/math/arithmetic
 $ # If only this was installed
 $ rm -rf $GOPATH/github.com/ntrrg/ntgo
 ```
+
+## Contributing
+
+See the [contribution guide](CONTRIBUTING.md) for more information.
 
 ## Acknowledgment
 

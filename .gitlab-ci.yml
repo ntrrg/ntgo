@@ -1,6 +1,8 @@
 image: golang:1.10.3-alpine
 variables:
   CI_PROJECT_DIR: /go/src/github.com/ntrrg/ntgo
+before_script:
+  - apk update && apk add git make
 test:
   script:
     - make deps
