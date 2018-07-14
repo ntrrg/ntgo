@@ -2,14 +2,12 @@
 // This source code was released under the MIT license.
 
 /*
-Package arithmetic provides arithmetic operations for any type. The four
-elemental operations (addition, subtraction, multiplication and division) are
-defined as function with their short names (Add, Sub, Mul and Div), and all of
-them extract the arithmetical representation from their arguments using the
-GetVal function.
+Package arithmetic provides arithmetic operations for any type.
 
-Since there are some data types without an arithmetical representation, some
-rules are applied during the value extraction.
+The four elemental operations (addition, subtraction, multiplication and
+division) are defined as functions with their short names (Add, Sub, Mul and
+Div). Since there are some data types without an arithmetical representation,
+some rules are applied during the value extraction.
 
 Value extraction rules
 
