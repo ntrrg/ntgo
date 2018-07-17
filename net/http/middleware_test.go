@@ -1,3 +1,6 @@
+// Copyright 2018 Miguel Angel Rivera Notararigo. All rights reserved.
+// This source code was released under the MIT license.
+
 package http_test
 
 import (
@@ -12,7 +15,7 @@ type HTTPHeader struct {
 	key, value string
 }
 
-func testChain(f interface{}, t *testing.T) {
+func testAdapt(f interface{}, t *testing.T) {
 	headers := []HTTPHeader{
 		{"X-Header", "x-value"},
 		{"Content-Type", "application/json; charset=utf-8"},
@@ -27,23 +30,23 @@ func testChain(f interface{}, t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("HEAD", "/", nil)
 
+	middleware := make([]nthttp.Adapter, len(headers))
+
+	for i, h := range headers {
+		middleware[i] = nthttp.SetHeader(h.key, h.value)
+	}
+
 	switch v := f.(type) {
-	case func(...http.Handler) http.Handler:
-		middleware := make([]http.Handler, len(headers))
-
-		for i, h := range headers {
-			middleware[i] = nthttp.SetHeader(h.key, h.value)
-		}
-
-		v(middleware...).ServeHTTP(w, r)
-	case func(...http.HandlerFunc) http.HandlerFunc:
-		middleware := make([]http.HandlerFunc, len(headers))
-
-		for i, h := range headers {
-			middleware[i] = nthttp.SetHeader(h.key, h.value).ServeHTTP
-		}
-
-		v(middleware...).ServeHTTP(w, r)
+	case func(http.Handler, ...nthttp.Adapter) http.Handler:
+		v(
+			http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {}),
+			middleware...,
+		).ServeHTTP(w, r)
+	case func(http.HandlerFunc, ...nthttp.Adapter) http.Handler:
+		v(
+			func(w http.ResponseWriter, r *http.Request) {},
+			middleware...,
+		).ServeHTTP(w, r)
 	default:
 		t.Fatalf("Wrong function type %T", f)
 	}
@@ -71,5 +74,5 @@ func testChain(f interface{}, t *testing.T) {
 	}
 }
 
-func TestChainHandlers(t *testing.T)     { testChain(nthttp.ChainHandlers, t) }
-func TestChainHandlerFuncs(t *testing.T) { testChain(nthttp.ChainHandlerFuncs, t) }
+func TestAdapt(t *testing.T)     { testAdapt(nthttp.Adapt, t) }
+func TestAdaptFunc(t *testing.T) { testAdapt(nthttp.AdaptFunc, t) }
