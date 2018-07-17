@@ -15,6 +15,9 @@ build:
 build-docker:
 	docker build -t ntrrg/ntgo  .
 
+.PHONY: check
+check: test lint coverage benchmark
+
 .PHONY: ci
 ci: test lint qa coverage benchmark
 
