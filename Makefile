@@ -65,7 +65,7 @@ lint-md:
 
 .PHONY: qa
 qa: deps
-	CGO_ENABLED=0 gometalinter.v2 --tests ./...
+	CGO_ENABLED=0 gometalinter.v2 --tests --disable=interfacer ./...
 
 .PHONY: test
 test:
