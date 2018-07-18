@@ -4,9 +4,9 @@ clone:
     depth: 1
 pipeline:
   test:
-    image: ntrrg/ntgo
+    image: golang:1.10.3-alpine
     commands:
       - export PACKAGE="$(go env GOPATH)/src/github.com/ntrrg/ntgo"
+      - mkdir -p $(dirname $PACKAGE)
       - ln -sf "$PWD" "$PACKAGE"
-      - cd "$PACKAGE"
-      - make ci
+      - cd "$PACKAGE" && make ci
