@@ -11,10 +11,6 @@ benchmark:
 build:
 	go build -i ./...
 
-.PHONY: build-docker
-build-docker:
-	docker build -t ntrrg/ntgo  .
-
 .PHONY: check
 check: test lint coverage benchmark
 
