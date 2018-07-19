@@ -25,7 +25,35 @@ func AdaptFunc(h http.HandlerFunc, a ...Adapter) http.Handler {
 	return Adapt(h, a...)
 }
 
-// SetHeader creates/replace a HTTP header before calling the http.Handler.
+// ############################################################################
+//                                   Headers
+// ############################################################################
+
+// AddHeader creates/appends a HTTP header before calling the http.Handler.
+func AddHeader(key, value string) Adapter {
+	return func(h http.Handler) http.Handler {
+		nh := func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Add(key, value)
+			h.ServeHTTP(w, r)
+		}
+
+		return http.HandlerFunc(nh)
+	}
+}
+
+// DelHeader removes a HTTP header before calling the http.Handler.
+func DelHeader(key string) Adapter {
+	return func(h http.Handler) http.Handler {
+		nh := func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Del(key)
+			h.ServeHTTP(w, r)
+		}
+
+		return http.HandlerFunc(nh)
+	}
+}
+
+// SetHeader creates/replaces a HTTP header before calling the http.Handler.
 func SetHeader(key, value string) Adapter {
 	return func(h http.Handler) http.Handler {
 		nh := func(w http.ResponseWriter, r *http.Request) {
@@ -35,4 +63,10 @@ func SetHeader(key, value string) Adapter {
 
 		return http.HandlerFunc(nh)
 	}
+}
+
+// JSONResponse prepares the response to be a JSON response. This adds the
+// respectives headers.
+func JSONResponse() Adapter {
+	return SetHeader("Content-Type", "application/json; charset=utf-8")
 }
