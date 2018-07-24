@@ -6,3 +6,5 @@ git:
 language: go
 go: "1.10"
 script: make ci
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
