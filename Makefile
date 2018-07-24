@@ -1,15 +1,16 @@
 gofiles := $(shell find . -iname "*.go" -type f)
+coverage_file := coverage.txt
 
 .PHONY: all
 all: build
 
 .PHONY: benchmark
 benchmark:
-	go test -bench . -benchmem ./...
+	go test -race -bench . -benchmem ./...
 
 .PHONY: build
 build:
-	go build -i ./...
+	go build ./...
 
 .PHONY: check
 check: test lint coverage benchmark
@@ -19,17 +20,17 @@ ci: test lint qa coverage benchmark
 
 .PHONY: clean
 clean:
-	rm -f coverage.out
+	rm -f $(coverage_file)
 
 .PHONY: coverage
 coverage:
-	@go test -covermode count -coverprofile coverage.out ./... > /dev/null
-	go tool cover -func coverage.out
+	@go test -race -coverprofile $(coverage_file) ./... > /dev/null
+	go tool cover -func $(coverage_file)
 
 .PHONY: coverage-web
 coverage-web:
-	@go test -covermode count -coverprofile coverage.out ./... > /dev/null
-	go tool cover -html coverage.out
+	@go test -race -coverprofile $(coverage_file) ./... > /dev/null
+	go tool cover -html $(coverage_file)
 
 .PHONY: deps
 deps:
@@ -65,5 +66,5 @@ qa: deps
 
 .PHONY: test
 test:
-	go test -v ./...
+	go test -race -v ./...
 

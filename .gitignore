@@ -3,6 +3,6 @@
 Session.vim
 nogit-*
 .DS_Store
-coverage.out
+coverage.txt
 .screenrc
 
