@@ -9,15 +9,17 @@
 
 &nbsp;&nbsp;`arithmetic`:
 ![API status](https://img.shields.io/badge/status-testing-yellow.svg)
-[![gocover](http://gocover.io/_badge/github.com/ntrrg/math/arithmetic)](https://gocover.io/github.com/ntrrg/ntgo/math/arithmetic)
 [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/math/arithmetic?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/math/arithmetic)
 
 `net`:
 
 &nbsp;&nbsp;`http`:
 ![API status](https://img.shields.io/badge/status-unstable-red.svg)
-[![gocover](http://gocover.io/_badge/github.com/ntrrg/net/http)](https://gocover.io/github.com/ntrrg/ntgo/net/http)
 [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/net/http?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/net/http)
+
+&nbsp;&nbsp;&nbsp;&nbsp;`middleware`:
+![API status](https://img.shields.io/badge/status-unstable-red.svg)
+[![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/net/http/middleware?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/net/http/middleware)
 
 ## Install
 

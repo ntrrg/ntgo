@@ -1,7 +1,7 @@
 // Copyright 2018 Miguel Angel Rivera Notararigo. All rights reserved.
 // This source code was released under the MIT license.
 
-package http_test
+package middleware_test
 
 import (
 	"fmt"
@@ -9,7 +9,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	nthttp "github.com/ntrrg/ntgo/net/http"
+	"github.com/ntrrg/ntgo/net/http/middleware"
 )
 
 func benchmarkAdapt(n int, b *testing.B) {
@@ -21,17 +21,26 @@ func benchmarkAdapt(n int, b *testing.B) {
 		}
 	})
 
-	la := make([]nthttp.Adapter, n)
+	la := make([]middleware.Adapter, n)
 
 	for i := 0; i < n; i++ {
-		la[i] = nthttp.SetHeader(fmt.Sprintf("X-Header%d", i), "value")
+		key, value := fmt.Sprintf("X-Header%d", i), "value"
+
+		la[i] = func(h http.Handler) http.Handler {
+			nh := func(w http.ResponseWriter, r *http.Request) {
+				w.Header().Set(key, value)
+				h.ServeHTTP(w, r)
+			}
+
+			return http.HandlerFunc(nh)
+		}
 	}
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("HEAD", "/", nil)
 
 	for i := 0; i < b.N; i++ {
-		nthttp.Adapt(h, la...).ServeHTTP(w, r)
+		middleware.Adapt(h, la...).ServeHTTP(w, r)
 	}
 }
 
