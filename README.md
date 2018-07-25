@@ -4,25 +4,23 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/ntrrg/ntgo?branch=master)](https://bettercodehub.com/results/ntrrg/ntgo)
 [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo?status.svg)](https://godoc.org/github.com/ntrrg/ntgo)
 
-`math`:
-
-&nbsp;&nbsp;`arithmetic`:
-![API status](https://img.shields.io/badge/status-testing-yellow.svg)
-[![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/math/arithmetic?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/math/arithmetic)
-
-`net`:
-
-&nbsp;&nbsp;`http`:
-![API status](https://img.shields.io/badge/status-unstable-red.svg)
-[![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/net/http?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/net/http)
-
-&nbsp;&nbsp;&nbsp;&nbsp;`middleware`:
-![API status](https://img.shields.io/badge/status-testing-yellow.svg)
-[![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/net/http/middleware?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/net/http/middleware)
+| Package | Status |
+|-:|:-|
+| `math` | |
+|`math/arithmetic` | ![API status](https://img.shields.io/badge/status-testing-yellow.svg) [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/math/arithmetic?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/math/arithmetic) |
+| `net` | |
+| `net/http` | ![API status](https://img.shields.io/badge/status-unstable-red.svg) [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/net/http?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/net/http) |
+| `net/http/middleware` | ![API status](https://img.shields.io/badge/status-testing-yellow.svg) [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/net/http/middleware?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/net/http/middleware) |
 
 ## Install
 
-**All the packages:**
+---
+
+**Warning:** since this project is personal and experimental, it doesn't
+provide any kind of guarantee or backward compatibility. My recommendation is
+to vendor it or just copy the needed pieces of code.
+
+---
 
 ```shell-session
 $ go get -u github.com/ntrrg/ntgo/...
@@ -35,8 +33,6 @@ $ go get -u github.com/ntrrg/ntgo/math/arithmetic
 ```
 
 ## Uninstall
-
-**All the packages:**
 
 ```shell-session
 $ go clean -i github.com/ntrrg/ntgo/...
