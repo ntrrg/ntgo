@@ -2,6 +2,7 @@
 // This source code was released under the MIT license.
 
 /*
-Package http provides some utilities commonly used in HTTP projects.
+Package http provides HTTP server implementation based on http package from
+the stdlib.
 */
 package http

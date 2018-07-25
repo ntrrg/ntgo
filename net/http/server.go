@@ -18,29 +18,41 @@ const ServerLogPrefix = "[SERVER] "
 
 // Config wraps all the customizable options from Server.
 type Config struct {
-	Addr        string
-	Handler     http.Handler
-	Logger      *log.Logger
-	ErrLogger   *log.Logger
-	Ctx         context.Context
-	ShutdownCtx func() context.Context
-	Done        chan struct{}
-}
+	// TCP address to listen on. If a path to a file is given, the server will use
+	// a Unix Domain Socket.
+	Addr string
 
-// Server is a http.Server with extra functionalities.
-type Server struct {
-	http.Server
+	// Requests handler. Just as http.Server, if nil is given,
+	// http.DefaultServeMux will be used.
+	Handler http.Handler
 
 	Log         *log.Logger
 	ELog        *log.Logger
-	Ctx         context.Context
 	ShutdownCtx func() context.Context
-	Done        chan struct{}
+}
+
+// Server is a http.Server with some extra functionalities.
+type Server struct {
+	http.Server
+
+	// Logger for regular logging, if nil is given, stdout will be used.
+	Log *log.Logger
+
+	// Logger for error logging, if nil is given, stderr will be used.
+	ELog *log.Logger
+
+	// Shutdown context used for gracefully shutdown, it is implemented as a
+	// function since deadlines will start at server creation and not at shutdown.
+	ShutdownCtx func() context.Context
+
+	// Gracefully shutdown done notifier.
+	Done chan struct{}
 }
 
 // NewServer creates and setups a new Server.
 func NewServer(c Config) *Server {
 	s := new(Server)
+	s.Done = make(chan struct{})
 	s.Setup(c)
 	return s
 }
@@ -60,7 +72,7 @@ func (s *Server) ListenAndServe() error {
 		s.Log.Println("Interrupt signal received, shutting down the server..")
 
 		if err := s.Shutdown(s.ShutdownCtx()); err != nil {
-			s.ELog.Printf("Can't close the server gracefully.\n%v", err)
+			s.ELog.Fatalf("Can't close the server gracefully.\n%v", err)
 		} else {
 			s.Log.Println("All the pending tasks were done.")
 			s.Log.Println("Server closed.")
@@ -85,31 +97,29 @@ func (s *Server) ListenAndServe() error {
 
 // Setup prepares the Server with the given Config.
 func (s *Server) Setup(c Config) {
-	s.Addr = c.Addr
-	s.Handler = c.Handler
-	s.Ctx = c.Ctx
+	if c.Addr != "" {
+		s.Addr = c.Addr
+	}
 
-	if c.Logger == nil {
+	if c.Handler != nil {
+		s.Handler = c.Handler
+	}
+
+	if c.Log != nil {
+		s.Log = c.Log
+	} else if s.Log == nil {
 		s.Log = log.New(os.Stdout, ServerLogPrefix, log.LstdFlags)
-	} else {
-		s.Log = c.Logger
 	}
 
-	if c.ErrLogger == nil {
+	if c.ELog != nil {
+		s.ELog = c.ELog
+	} else if s.ELog == nil {
 		s.ELog = log.New(os.Stderr, ServerLogPrefix, log.LstdFlags)
-	} else {
-		s.ELog = c.ErrLogger
 	}
 
-	if c.ShutdownCtx == nil {
-		s.ShutdownCtx = func() context.Context { return context.Background() }
-	} else {
+	if c.ShutdownCtx != nil {
 		s.ShutdownCtx = c.ShutdownCtx
-	}
-
-	if c.Done == nil {
-		s.Done = make(chan struct{})
-	} else {
-		s.Done = c.Done
+	} else if s.ShutdownCtx == nil {
+		s.ShutdownCtx = func() context.Context { return context.Background() }
 	}
 }
