@@ -1,6 +1,6 @@
 [![Travis build btatus](https://travis-ci.com/ntrrg/ntgo.svg?branch=master)](https://travis-ci.com/ntrrg/ntgo)
-[![Gitlab build btatus](https://gitlab.com/ntrrg/ntgo/badges/master/pipeline.svg)](https://gitlab.com/ntrrg/ntgo/commits/master)
 [![Drone build status](https://ci.nt.web.ve/api/badges/ntrrg/ntgo/status.svg)](https://ci.nt.web.ve/ntrrg/ntgo)
+[![codecov](https://codecov.io/gh/ntrrg/ntgo/branch/master/graph/badge.svg)](https://codecov.io/gh/ntrrg/ntgo)
 [![goreport](https://goreportcard.com/badge/github.com/ntrrg/ntgo)](https://goreportcard.com/report/github.com/ntrrg/ntgo) 
 [![BCH compliance](https://bettercodehub.com/edge/badge/ntrrg/ntgo?branch=master)](https://bettercodehub.com/results/ntrrg/ntgo)
 [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo?status.svg)](https://godoc.org/github.com/ntrrg/ntgo)
@@ -18,7 +18,7 @@
 [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/net/http?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/net/http)
 
 &nbsp;&nbsp;&nbsp;&nbsp;`middleware`:
-![API status](https://img.shields.io/badge/status-unstable-red.svg)
+![API status](https://img.shields.io/badge/status-testing-yellow.svg)
 [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/net/http/middleware?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/net/http/middleware)
 
 ## Install
