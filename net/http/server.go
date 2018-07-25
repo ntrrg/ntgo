@@ -108,7 +108,7 @@ func (s *Server) Setup(c Config) {
 	}
 
 	if c.Done == nil {
-		s.Done = make(chan struct{})
+		s.Done = make(chan struct{}, 1)
 	} else {
 		s.Done = c.Done
 	}
