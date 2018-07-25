@@ -70,7 +70,6 @@ func ExampleJSONResponse() {
 
 	// Response
 	res := w.Result()
-	defer res.Body.Close()
 	data, err := ioutil.ReadAll(res.Body)
 
 	if err != nil {
