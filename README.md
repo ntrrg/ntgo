@@ -1,5 +1,4 @@
 [![Travis build btatus](https://travis-ci.com/ntrrg/ntgo.svg?branch=master)](https://travis-ci.com/ntrrg/ntgo)
-[![Drone build status](https://ci.nt.web.ve/api/badges/ntrrg/ntgo/status.svg)](https://ci.nt.web.ve/ntrrg/ntgo)
 [![codecov](https://codecov.io/gh/ntrrg/ntgo/branch/master/graph/badge.svg)](https://codecov.io/gh/ntrrg/ntgo)
 [![goreport](https://goreportcard.com/badge/github.com/ntrrg/ntgo)](https://goreportcard.com/report/github.com/ntrrg/ntgo) 
 [![BCH compliance](https://bettercodehub.com/edge/badge/ntrrg/ntgo?branch=master)](https://bettercodehub.com/results/ntrrg/ntgo)
