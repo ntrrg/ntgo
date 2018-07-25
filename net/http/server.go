@@ -53,7 +53,7 @@ func (s *Server) ListenAndServe() error {
 	go func() {
 		defer close(s.Done)
 
-		sigint := make(chan os.Signal)
+		sigint := make(chan os.Signal, 1)
 		signal.Notify(sigint, os.Interrupt)
 		<-sigint
 
@@ -108,7 +108,7 @@ func (s *Server) Setup(c Config) {
 	}
 
 	if c.Done == nil {
-		s.Done = make(chan struct{}, 1)
+		s.Done = make(chan struct{})
 	} else {
 		s.Done = c.Done
 	}
