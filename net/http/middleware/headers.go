@@ -43,6 +43,8 @@ func SetHeader(key, value string) Adapter {
 
 // Cache sets HTTP cache headers for GET requests.
 //
+// Directives
+//
 // * public/private: whether the cached response is for any or a specific user.
 //
 // * max-age=TIME: cache life time in seconds. The maximum value is 1 year.
@@ -50,11 +52,11 @@ func SetHeader(key, value string) Adapter {
 // * s-max-age=TIME: same as max-age, but this one has effect in proxies.
 //
 // * must-revalidate: force expired cached response revalidation, even in
-//   special circumstances (like slow connections, were cached responses are
-//   used even after they had expired).
+// special circumstances (like slow connections, were cached responses are used
+// even after they had expired).
 //
 // * proxy-revalidate: same as must-revalidate, but this one has effect in
-//   proxies.
+// proxies.
 //
 // * no-cache: disables cache.
 //
