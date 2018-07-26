@@ -41,8 +41,29 @@ func SetHeader(key, value string) Adapter {
 	}
 }
 
-// JSONResponse prepares the response to be a JSON response. This adds the
-// respective headers.
+// Cache sets HTTP cache headers for GET requests.
+//
+// * public/private: whether the cached response is for any or a specific user.
+//
+// * max-age=TIME: cache life time in seconds. The maximum value is 1 year.
+//
+// * s-max-age=TIME: same as max-age, but this one has effect in proxies.
+//
+// * must-revalidate: force expired cached response revalidation, even in
+//   special circumstances (like slow connections, were cached responses are
+//   used even after they had expired).
+//
+// * proxy-revalidate: same as must-revalidate, but this one has effect in
+//   proxies.
+//
+// * no-cache: disables cache.
+//
+// * no-store: disables cache, even in proxies.
+func Cache(directives string) Adapter {
+	return SetHeader("Cache-Control", directives)
+}
+
+// JSONResponse prepares the response to be a JSON response.
 func JSONResponse() Adapter {
 	return SetHeader("Content-Type", "application/json; charset=utf-8")
 }
