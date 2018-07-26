@@ -62,7 +62,17 @@ func SetHeader(key, value string) Adapter {
 //
 // * no-store: disables cache, even in proxies.
 func Cache(directives string) Adapter {
-	return SetHeader("Cache-Control", directives)
+	return func(h http.Handler) http.Handler {
+		nh := func(w http.ResponseWriter, r *http.Request) {
+			if r.Method == http.MethodGet {
+				w.Header().Set("Cache-Control", directives)
+			}
+
+			h.ServeHTTP(w, r)
+		}
+
+		return http.HandlerFunc(nh)
+	}
 }
 
 // JSONResponse prepares the response to be a JSON response.
