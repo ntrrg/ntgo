@@ -81,7 +81,7 @@ func GetVal(operander interface{}) float64 {
 		return x.Float()
 	case reflect.Complex64, reflect.Complex128:
 		y := x.Complex()
-		return real(y) + imag(y)
+		return real(y)
 	case reflect.Array, reflect.Chan, reflect.Map, reflect.Slice, reflect.String:
 		return float64(x.Len())
 	case reflect.Struct:

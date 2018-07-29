@@ -22,11 +22,11 @@ values they will be 0.
 
 4. Numeric elements (int, int8, int16, int32, int64, uint, uint8, uint16,
 uint32, uint64, float32, float64, complex64, complex128, byte, rune) will be
-converted to float64, but complex numbers will be represented by the sum of
-their real and imaginary part (in float64 form to).
+converted to float64, but complex numbers will be represented by their real
+part in float64 form.
 
-5. Composed elements (arrays, channels, maps, slices, strings, structs) will be
-represented by their length (or their number of fields for structs).
+5. Composed (arrays, maps, slices, strings, structs) and channel elements will
+be represented by their length (or their number of fields for structs).
 
 6. Any other element will be 0.
 */
