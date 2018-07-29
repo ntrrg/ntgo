@@ -1,11 +1,3 @@
----
-
-**Warning:** since this project is personal and experimental, it doesn't
-provide any kind of guarantee or backward compatibility. My recommendation is
-to vendor it or just copy the needed pieces of code.
-
----
-
 [![Travis build btatus](https://travis-ci.com/ntrrg/ntgo.svg?branch=master)](https://travis-ci.com/ntrrg/ntgo)
 [![codecov](https://codecov.io/gh/ntrrg/ntgo/branch/master/graph/badge.svg)](https://codecov.io/gh/ntrrg/ntgo)
 [![goreport](https://goreportcard.com/badge/github.com/ntrrg/ntgo)](https://goreportcard.com/report/github.com/ntrrg/ntgo) 
@@ -18,6 +10,14 @@ to vendor it or just copy the needed pieces of code.
 | `net` | |
 | `net/http` | ![API status](https://img.shields.io/badge/status-unstable-red.svg) [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/net/http?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/net/http) |
 | `net/http/middleware` | ![API status](https://img.shields.io/badge/status-testing-yellow.svg) [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/net/http/middleware?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/net/http/middleware) |
+
+---
+
+**Warning:** since this project is personal and experimental, it doesn't
+provide any kind of guarantee or backward compatibility. My recommendation is
+to vendor it or just copy the needed pieces of code.
+
+---
 
 ## Install
 
