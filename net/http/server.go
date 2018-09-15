@@ -58,30 +58,30 @@ func (s *Server) ListenAndServe() error {
 		signal.Notify(sigint, os.Interrupt)
 		<-sigint
 
-		log.Println("[SERVER][INFO] Shutting down the server..")
+		log.Println("[INFO][SERVER] Shutting down the server..")
 
 		if err := s.Shutdown(s.ShutdownCtx()); err != nil {
-			log.Fatalf("[SERVER][ERROR] Can't close the server gracefully.\n%v", err)
+			log.Fatalf("[ERROR][SERVER] Can't close the server gracefully.\n%v", err)
 		} else {
-			log.Println("[SERVER][INFO] All the pending tasks were done.")
+			log.Println("[INFO][SERVER] All the pending tasks were done.")
 		}
 
-		log.Println("[SERVER][INFO] Server closed.")
+		log.Println("[INFO][SERVER] Server closed.")
 	}()
 
 	if strings.Contains(addr, "/") {
 		uds, err := net.Listen("unix", addr)
 
 		if err != nil {
-			log.Printf("[SERVER][ERROR] Can't use the socket %s.\n%v", addr, err)
+			log.Printf("[ERROR][SERVER] Can't use the socket %s.\n%v", addr, err)
 			return err
 		}
 
-		log.Printf("[SERVER][INFO] Using UDS %v..\n", addr)
+		log.Printf("[INFO][SERVER] Using UDS %v..\n", addr)
 		return s.Server.Serve(uds)
 	}
 
-	log.Printf("[SERVER][INFO] Listening on %v..\n", addr)
+	log.Printf("[INFO][SERVER] Listening on %v..\n", addr)
 	return s.Server.ListenAndServe()
 }
 
