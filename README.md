@@ -3,9 +3,9 @@
 [![goreport](https://goreportcard.com/badge/github.com/ntrrg/ntgo)](https://goreportcard.com/report/github.com/ntrrg/ntgo) 
 
 | Package | Status |
-|-:|:-|
-| `math` | |
-|`math/arithmetic` | ![API status](https://img.shields.io/badge/status-stable-brightgreen.svg) [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/math/arithmetic?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/math/arithmetic) |
+|:-|:-|
+| `container` | |
+|`container/arithmetic` | ![API status](https://img.shields.io/badge/status-stable-brightgreen.svg) [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/container/arithmetic?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/container/arithmetic) |
 | `net` | |
 | `net/http` | ![API status](https://img.shields.io/badge/status-unstable-red.svg) [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/net/http?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/net/http) |
 | `net/http/middleware` | ![API status](https://img.shields.io/badge/status-testing-yellow.svg) [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/net/http/middleware?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/net/http/middleware) |
@@ -27,7 +27,7 @@ $ go get -u github.com/ntrrg/ntgo/...
 **Specific package:**
 
 ```shell-session
-$ go get -u github.com/ntrrg/ntgo/math/arithmetic
+$ go get -u github.com/ntrrg/ntgo/container/arithmetic
 ```
 
 ## Uninstall
@@ -47,7 +47,7 @@ $ rm -rf $GOPATH/pkg/$(go env GOHOSTOS)_$(go env GOHOSTARCH)/github.com/ntrrg/nt
 **Specific package:**
 
 ```shell-session
-$ go clean -i github.com/ntrrg/ntgo/math/arithmetic
+$ go clean -i github.com/ntrrg/ntgo/container/arithmetic
 ```
 
 ```shell-session

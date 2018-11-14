@@ -6,7 +6,7 @@ package arithmetic_test
 import (
 	"testing"
 
-	"github.com/ntrrg/ntgo/math/arithmetic"
+	"github.com/ntrrg/ntgo/container/arithmetic"
 )
 
 // For BytesSum see operander_example_test.go
