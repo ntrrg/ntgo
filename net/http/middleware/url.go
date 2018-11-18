@@ -16,7 +16,7 @@ func ReplaceURL(old, news string) Adapter {
 			r2 := new(http.Request)
 			*r2 = *r
 			r2.URL = new(url.URL)
-			*r2.URL = *r2.URL
+			*r2.URL = *r.URL
 			r2.URL.Path = strings.Replace(r.URL.Path, old, news, 1)
 			h.ServeHTTP(w, r2)
 		}

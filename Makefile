@@ -59,7 +59,7 @@ lint-md:
 
 .PHONY: qa
 qa: $(make_bin)/gometalinter
-	PATH="$(make_bin):$$PATH" CGO_ENABLED=0 gometalinter --tests ./ ./api/... ./pkg/...
+	PATH="$(make_bin):$$PATH" CGO_ENABLED=0 gometalinter --tests ./...
 
 .PHONY: test
 test:
