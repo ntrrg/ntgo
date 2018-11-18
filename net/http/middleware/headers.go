@@ -81,14 +81,13 @@ func JSONRequest(msg string) Adapter {
 	return func(h http.Handler) http.Handler {
 		nh := func(w http.ResponseWriter, r *http.Request) {
 			m := r.Method
+			ct := r.Header["Content-Type"]
 
-			if m != http.MethodPost && m != http.MethodPut && m != http.MethodPathc {
+			if m != http.MethodPost && m != http.MethodPut && m != http.MethodPatch {
 				goto serve
 			}
 
-			ct := r.Header["Content-Type"]
-
-			if ct != "application/json; charset=utf-8" {
+			if ct[0] != "application/json; charset=utf-8" {
 				http.Error(w, msg, http.StatusUnsupportedMediaType)
 			}
 
