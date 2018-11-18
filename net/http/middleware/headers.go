@@ -75,6 +75,31 @@ func Cache(directives string) Adapter {
 	}
 }
 
+// JSONRequest checks that request has the appropriate 'Content-Type'. Responds
+// with 415 status code and msg as body if not.
+func JSONRequest(msg string) Adapter {
+	return func(h http.Handler) http.Handler {
+		nh := func(w http.ResponseWriter, r *http.Request) {
+			m := r.Method
+
+			if m != http.MethodPost && m != http.MethodPut && m != http.MethodPathc {
+				goto serve
+			}
+
+			ct := r.Header["Content-Type"]
+
+			if ct != "application/json; charset=utf-8" {
+				http.Error(w, msg, http.StatusUnsupportedMediaType)
+			}
+
+		serve:
+			h.ServeHTTP(w, r)
+		}
+
+		return http.HandlerFunc(nh)
+	}
+}
+
 // JSONResponse prepares the response to be a JSON response.
 func JSONResponse() Adapter {
 	return SetHeader("Content-Type", "application/json; charset=utf-8")
