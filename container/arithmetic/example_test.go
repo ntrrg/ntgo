@@ -29,6 +29,13 @@ func ExampleDiv() {
 	// Output: 2
 }
 
+func ExampleEq() {
+	r := arithmetic.Eq('a', 'a', 'a')
+	r2 := arithmetic.Eq('a', 'b', 'c')
+	fmt.Println(r, r2)
+	// Output: true false
+}
+
 func ExampleMul() {
 	r := arithmetic.Mul(1+2i, func() {})
 	fmt.Println(r)

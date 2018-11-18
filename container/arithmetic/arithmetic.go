@@ -37,6 +37,19 @@ func Div(operanders ...interface{}) float64 {
 	return result
 }
 
+// Eq gets any number of elements and checks if are equals.
+func Eq(operanders ...interface{}) bool {
+	x := GetVal(operanders[0])
+
+	for _, v := range operanders[1:] {
+		if x != GetVal(v) {
+			return false
+		}
+	}
+
+	return true
+}
+
 // Mul gets any number of elements and returns their multiplication.
 func Mul(operanders ...interface{}) float64 {
 	result := GetVal(operanders[0])
