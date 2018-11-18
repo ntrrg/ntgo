@@ -5,7 +5,6 @@ package middleware
 
 import (
 	"net/http"
-	"net/url"
 	"strings"
 )
 
@@ -13,12 +12,8 @@ import (
 func ReplaceURL(old, news string) Adapter {
 	return func(h http.Handler) http.Handler {
 		nh := func(w http.ResponseWriter, r *http.Request) {
-			r2 := new(http.Request)
-			*r2 = *r
-			r2.URL = new(url.URL)
-			*r2.URL = *r.URL
-			r2.URL.Path = strings.Replace(r.URL.Path, old, news, 1)
-			h.ServeHTTP(w, r2)
+			r.URL.Path = strings.Replace(r.URL.Path, old, news, 1)
+			h.ServeHTTP(w, r)
 		}
 
 		return http.HandlerFunc(nh)

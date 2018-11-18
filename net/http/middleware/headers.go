@@ -3,7 +3,10 @@
 
 package middleware
 
-import "net/http"
+import (
+	"net/http"
+	"strings"
+)
 
 // AddHeader creates/appends a HTTP header before calling the http.Handler.
 func AddHeader(key, value string) Adapter {
@@ -87,8 +90,9 @@ func JSONRequest(msg string) Adapter {
 				goto serve
 			}
 
-			if ct[0] != "application/json; charset=utf-8" {
+			if strings.HasPrefix(ct[0], "application/json") {
 				http.Error(w, msg, http.StatusUnsupportedMediaType)
+				return
 			}
 
 		serve:
