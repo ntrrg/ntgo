@@ -5,8 +5,8 @@ package middleware
 
 import (
 	"net/http"
+	"net/url"
 	"strings"
-	"url"
 )
 
 // ReplaceURL replaces old by new from the request URL.
