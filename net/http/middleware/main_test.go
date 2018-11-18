@@ -50,7 +50,7 @@ func testAdapt(f interface{}, t *testing.T) {
 			http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {}),
 			al...,
 		).ServeHTTP(w, r)
-	case func(http.HandlerFunc, ...middleware.Adapter) http.Handler:
+	case func(func(http.ResponseWriter, *http.Request), ...middleware.Adapter) http.Handler:
 		v(
 			func(w http.ResponseWriter, r *http.Request) {},
 			al...,
