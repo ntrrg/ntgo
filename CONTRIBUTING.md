@@ -30,9 +30,11 @@ you show how you get the unexpected behavior.
 
 [GitHub Issue Tracker]: https://github.com/ntrrg/ntenvs/issues
 
-If you can do some stuff in the terminal, you are familiar with the [GitHub Issue Tracker][],
-and you found some issue or just want to share a recommendation, you already
-are a tester.
+If you can do some stuff in the terminal and you are familiar with the
+[GitHub Issue Tracker][], you are already a tester. In case you find a bug,
+know better approaches than the used in this code or just want to ask for a
+feature, all you need to do is go to the [GitHub Issue Tracker][] and create a
+new entry in there.
 
 ## As developer
 

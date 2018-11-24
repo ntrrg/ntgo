@@ -2,6 +2,9 @@
 [![codecov](https://codecov.io/gh/ntrrg/ntgo/branch/master/graph/badge.svg)](https://codecov.io/gh/ntrrg/ntgo)
 [![goreport](https://goreportcard.com/badge/github.com/ntrrg/ntgo)](https://goreportcard.com/report/github.com/ntrrg/ntgo) 
 
+**ntgo** is a collection of packages that provides HTTP utilities, data
+structures implementations and tools commonly used by other projects.
+
 | Package | Status |
 |:-|:-|
 | `container` | |
@@ -48,11 +51,6 @@ $ rm -rf $GOPATH/pkg/$(go env GOHOSTOS)_$(go env GOHOSTARCH)/github.com/ntrrg/nt
 
 ```shell-session
 $ go clean -i github.com/ntrrg/ntgo/container/arithmetic
-```
-
-```shell-session
-$ # If only this was installed
-$ rm -rf $GOPATH/github.com/ntrrg/ntgo
 ```
 
 ## Contributing
