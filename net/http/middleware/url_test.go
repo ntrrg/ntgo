@@ -16,7 +16,7 @@ func TestReplace(t *testing.T) {
 	h := middleware.AdaptFunc(
 		func(w http.ResponseWriter, r *http.Request) {
 			if _, err := w.Write([]byte(r.URL.Path)); err != nil {
-				// Error handling
+				t.Error(err)
 			}
 		},
 
@@ -30,7 +30,7 @@ func TestReplace(t *testing.T) {
 	data, err := ioutil.ReadAll(res.Body)
 
 	if err != nil {
-		// Error handling
+		t.Error(err)
 	}
 
 	if string(data) != "/a314/" {
@@ -42,7 +42,7 @@ func TestStripPrefix(t *testing.T) {
 	h := middleware.AdaptFunc(
 		func(w http.ResponseWriter, r *http.Request) {
 			if _, err := w.Write([]byte(r.URL.Path)); err != nil {
-				// Error handling
+				t.Error(err)
 			}
 		},
 
@@ -56,7 +56,7 @@ func TestStripPrefix(t *testing.T) {
 	data, err := ioutil.ReadAll(res.Body)
 
 	if err != nil {
-		// Error handling
+		t.Error(err)
 	}
 
 	if string(data) != "/" {

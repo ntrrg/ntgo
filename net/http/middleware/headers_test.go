@@ -50,13 +50,13 @@ func TestCache(t *testing.T) {
 	}{
 		{
 			method: http.MethodGet,
-			value: "max-age=3600, s-max-age=3600",
-			want: "max-age=3600, s-max-age=3600",
+			value:  "max-age=3600, s-max-age=3600",
+			want:   "max-age=3600, s-max-age=3600",
 		},
 		{
 			method: http.MethodHead,
-			value: "private, max-age=3600",
-			want: "",
+			value:  "private, max-age=3600",
+			want:   "",
 		},
 	}
 
@@ -104,27 +104,27 @@ func TestJSONRequest(t *testing.T) {
 	}{
 		{
 			method: http.MethodGet,
-			ct: "application/json; charset=utf-8",
+			ct:     "application/json; charset=utf-8",
 			status: http.StatusMethodNotAllowed,
 		},
 		{
 			method: http.MethodPost,
-			ct: "application/json; charset=utf-8",
+			ct:     "application/json; charset=utf-8",
 			status: http.StatusOK,
 		},
 		{
 			method: http.MethodPut,
-			ct: "text/plain; charset=utf-8",
+			ct:     "text/plain; charset=utf-8",
 			status: http.StatusUnsupportedMediaType,
 		},
 		{
 			method: http.MethodPatch,
-			ct: "application/json",
+			ct:     "application/json",
 			status: http.StatusOK,
 		},
 		{
 			method: http.MethodDelete,
-			ct: "text/plain; charset=utf-8",
+			ct:     "text/plain; charset=utf-8",
 			status: http.StatusMethodNotAllowed,
 		},
 	}

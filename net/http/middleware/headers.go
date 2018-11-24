@@ -80,14 +80,22 @@ func JSONRequest(body interface{}) Adapter {
 			if m != http.MethodPost && m != http.MethodPut && m != http.MethodPatch {
 				w.Header().Set("Content-Type", "application/json; charset=utf-8")
 				http.Error(w, "", http.StatusMethodNotAllowed)
-				json.NewEncoder(w).Encode(body)
+
+				if err := json.NewEncoder(w).Encode(body); err != nil {
+					panic(err)
+				}
+
 				return
 			}
 
 			if !strings.HasPrefix(r.Header.Get("Content-Type"), "application/json") {
 				w.Header().Set("Content-Type", "application/json; charset=utf-8")
 				http.Error(w, "", http.StatusUnsupportedMediaType)
-				json.NewEncoder(w).Encode(body)
+
+				if err := json.NewEncoder(w).Encode(body); err != nil {
+					panic(err)
+				}
+
 				return
 			}
 
