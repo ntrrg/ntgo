@@ -13,6 +13,29 @@ import (
 )
 
 func ExampleAdapt() {
+	h := middleware.Adapt(
+		http.FileServer(http.Dir(".")),
+		middleware.Cache("max-age=3600, s-max-age=3600"),
+		middleware.Gzip(-1),
+	)
+
+	// http.Handle("/", h)
+
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest(http.MethodGet, "/", nil)
+	r.Header.Set("Accept-Encoding", "gzip")
+	h.ServeHTTP(w, r)
+	res := w.Result()
+	fmt.Printf("Status: %v\n", res.Status)
+	fmt.Printf("Cache-Control: %+v\n", res.Header.Get("Cache-Control"))
+	fmt.Printf("Content-Encoding: %v", res.Header.Get("Content-Encoding"))
+	// Output:
+	// Status: 200 OK
+	// Cache-Control: max-age=3600, s-max-age=3600
+	// Content-Encoding: gzip
+}
+
+func ExampleAdaptFunc() {
 	h := middleware.AdaptFunc(
 		func(w http.ResponseWriter, r *http.Request) {},
 		middleware.JSONResponse(),
@@ -26,12 +49,12 @@ func ExampleAdapt() {
 	h.ServeHTTP(w, r)
 	res := w.Result()
 	fmt.Printf("Status: %v\n", res.Status)
-	fmt.Printf("Content-Type: %v\n", res.Header["Content-Type"][0])
-	fmt.Printf("Cache-Control: %+v", res.Header["Cache-Control"][0])
+	fmt.Printf("Cache-Control: %+v\n", res.Header.Get("Cache-Control"))
+	fmt.Printf("Content-Type: %v", res.Header.Get("Content-Type"))
 	// Output:
 	// Status: 200 OK
-	// Content-Type: application/json; charset=utf-8
 	// Cache-Control: max-age=3600, s-max-age=3600
+	// Content-Type: application/json; charset=utf-8
 }
 
 type headersIn []struct {
