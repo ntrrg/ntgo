@@ -5,12 +5,10 @@ package http
 
 import (
 	"context"
-	"log"
 	"net"
 	"net/http"
 	"os"
 	"os/signal"
-	"time"
 )
 
 // Config wraps all the customizable options from Server.
