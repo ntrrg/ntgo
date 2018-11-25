@@ -23,11 +23,6 @@ type Config struct {
 	// http.DefaultServeMux will be used.
 	Handler http.Handler
 
-	ReadTimeout time.Duration
-
-	// Logger used to display error messages from server internal operations.
-	ErrorLog *log.Logger
-
 	ShutdownCtx func() context.Context
 }
 
