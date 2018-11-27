@@ -67,7 +67,7 @@ test:
 
 $(make_bin)/gometalinter:
 	mkdir -p $(make_bin)
-	wget -cO /tmp/gometalinter.tar.gz 'https://storage.nt.web.ve/_/software/linux/gometalinter-2.0.11-linux-amd64.tar.gz' || wget -cO /tmp/gometalinter.tar.gz 'https://github.com/alecthomas/gometalinter/releases/download/v2.0.11/gometalinter-2.0.11-linux-amd64.tar.gz'
+	wget -t 1 -cO /tmp/gometalinter.tar.gz 'https://storage.nt.web.ve/_/software/linux/gometalinter-2.0.11-linux-amd64.tar.gz' || wget -cO /tmp/gometalinter.tar.gz 'https://github.com/alecthomas/gometalinter/releases/download/v2.0.11/gometalinter-2.0.11-linux-amd64.tar.gz'
 	tar -xf /tmp/gometalinter.tar.gz -C /tmp/
 	cp -a $$(find /tmp/gometalinter-2.0.11-linux-amd64/ -type f -executable) $(make_bin)/
 
