@@ -28,7 +28,7 @@ you show how you get the unexpected behavior.
 
 ## As tester
 
-[GitHub Issue Tracker]: https://github.com/ntrrg/ntenvs/issues
+[GitHub Issue Tracker]: https://github.com/ntrrg/ntgo/issues
 
 If you can do some stuff in the terminal and you are familiar with the
 [GitHub Issue Tracker][], you are already a tester. In case you find a bug,
