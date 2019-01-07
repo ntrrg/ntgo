@@ -8,8 +8,8 @@ structures implementations and tools commonly used by other projects.
 
 | Package | Status |
 |:-|:-|
-| `container` | |
-|`container/arithmetic` | ![API status](https://img.shields.io/badge/status-stable-brightgreen.svg) [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/container/arithmetic?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/container/arithmetic) |
+| `generics` | |
+|`generics/arithmetic` | ![API status](https://img.shields.io/badge/status-stable-brightgreen.svg) [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/generics/arithmetic?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/generics/arithmetic) |
 | `net` | |
 | `net/http` | ![API status](https://img.shields.io/badge/status-unstable-red.svg) [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/net/http?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/net/http) |
 | `net/http/middleware` | ![API status](https://img.shields.io/badge/status-testing-yellow.svg) [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/net/http/middleware?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/net/http/middleware) |
@@ -31,7 +31,7 @@ $ go get -u github.com/ntrrg/ntgo/...
 **Specific package:**
 
 ```shell-session
-$ go get -u github.com/ntrrg/ntgo/container/arithmetic
+$ go get -u github.com/ntrrg/ntgo/generics/arithmetic
 ```
 
 ## Uninstall
@@ -51,7 +51,7 @@ $ rm -rf $GOPATH/pkg/$(go env GOHOSTOS)_$(go env GOHOSTARCH)/github.com/ntrrg/nt
 **Specific package:**
 
 ```shell-session
-$ go clean -i github.com/ntrrg/ntgo/container/arithmetic
+$ go clean -i github.com/ntrrg/ntgo/generics/arithmetic
 ```
 
 ## Contributing
