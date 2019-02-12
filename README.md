@@ -3,7 +3,15 @@
 [![goreport](https://goreportcard.com/badge/github.com/ntrrg/ntgo)](https://goreportcard.com/report/github.com/ntrrg/ntgo) 
 [![BCH compliance](https://bettercodehub.com/edge/badge/ntrrg/ntgo?branch=master)](https://bettercodehub.com/results/ntrrg/ntgo)
 
-**ntgo** is a collection of packages that provides HTTP utilities, data
+---
+
+**Warning:** since this project is personal and experimental, it doesn't
+provide any kind of guarantee or backward compatibility. My recommendation is
+to vendor it or just copy the needed pieces of code.
+
+---
+
+**ntgo** is a collection of packages that provides network utilities, data
 structures implementations and tools commonly used by other projects.
 
 | Package | Status |
@@ -14,49 +22,13 @@ structures implementations and tools commonly used by other projects.
 | `net/http` | ![API status](https://img.shields.io/badge/status-unstable-red.svg) [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/net/http?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/net/http) |
 | `net/http/middleware` | ![API status](https://img.shields.io/badge/status-testing-yellow.svg) [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/net/http/middleware?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/net/http/middleware) |
 
----
+## Support
 
-**Warning:** since this project is personal and experimental, it doesn't
-provide any kind of guarantee or backward compatibility. My recommendation is
-to vendor it or just copy the needed pieces of code.
+[GitHub Issue Tracker]: https://github.com/ntrrg/ntgo/issues
 
----
-
-## Install
-
-```shell-session
-$ go get -u github.com/ntrrg/ntgo/...
-```
-
-**Specific package:**
-
-```shell-session
-$ go get -u github.com/ntrrg/ntgo/generics/arithmetic
-```
-
-## Uninstall
-
-```shell-session
-$ go clean -i github.com/ntrrg/ntgo/...
-```
-
-```shell-session
-$ rm -rf $GOPATH/github.com/ntrrg/ntgo
-```
-
-```shell-session
-$ rm -rf $GOPATH/pkg/$(go env GOHOSTOS)_$(go env GOHOSTARCH)/github.com/ntrrg/ntgo
-```
-
-**Specific package:**
-
-```shell-session
-$ go clean -i github.com/ntrrg/ntgo/generics/arithmetic
-```
-
-## Contributing
-
-See the [contribution guide](CONTRIBUTING.md) for more information.
+If you find a bug or you need help, file an issue at the [issue tracker][GitHub Issue Tracker].
+If you feel uncomfortable using technical tools, feel free to send me an email
+at ntrrgx@gmail.com.
 
 ## Acknowledgment
 
