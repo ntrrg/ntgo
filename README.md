@@ -74,3 +74,11 @@ Working on this project I use/used:
 
 * [Codecov](https://codecov.io)
 
+* [Golint](https://github.com/golang/lint/)
+
+* [Gometalinter](https://github.com/alecthomas/gometalinter)
+
+* [GolangCI](https://golangci.com)
+
+* [Mage](https://magefile.org/)
+

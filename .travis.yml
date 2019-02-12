@@ -6,7 +6,18 @@ language: go
 go: "1.11.5"
 env:
   - GO111MODULE=on
-script: make deps-dev ci
+jobs:
+  include:
+    - script: ./mage -v test
+    - stage: "QA"
+      name: "Linting"
+      script: ./mage -v lint
+    - name: "Tests coverage"
+      script: ./mage -v coverage:default
+    - name: "Benckmarks"
+      script: ./mage -v benchmark
+    - stage: "Deploy"
+      script: ./mage -v build
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
