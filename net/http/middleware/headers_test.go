@@ -93,7 +93,7 @@ func TestDelHeader(t *testing.T) {
 	res := w.Result().Header.Get(key)
 
 	if res != "" {
-		t.Errorf("The 'X-Header' header stills have values -> %v", res)
+		t.Errorf("The 'X-Header' header stills have values: %v", res)
 	}
 }
 
@@ -159,7 +159,7 @@ func TestJSONResponse(t *testing.T) {
 	res := w.Result().Header.Get("Content-Type")
 
 	if res != "application/json; charset=utf-8" {
-		t.Errorf("Bad header value -> %v", res)
+		t.Errorf("Bad header value: %v", res)
 	}
 }
 
