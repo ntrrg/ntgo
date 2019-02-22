@@ -425,7 +425,3 @@ func compareFiles(dst, src string) error {
 
 	return nil
 }
-
-func tmpDir(name string) (string, error) {
-	return ioutil.TempDir("", "ntgo-os-"+name)
-}
