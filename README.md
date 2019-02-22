@@ -21,6 +21,7 @@ structures implementations and tools commonly used by other projects.
 | `net` | |
 | `net/http` | ![API status](https://img.shields.io/badge/status-unstable-red.svg) [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/net/http?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/net/http) |
 | `net/http/middleware` | ![API status](https://img.shields.io/badge/status-testing-yellow.svg) [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/net/http/middleware?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/net/http/middleware) |
+| `os` | ![API status](https://img.shields.io/badge/status-stable-brightgreen.svg) [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/os?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/os) |
 
 ## Support
 
