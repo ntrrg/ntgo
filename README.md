@@ -28,12 +28,12 @@ structures implementations and tools commonly used by other projects.
 [GitHub Issue Tracker]: https://github.com/ntrrg/ntgo/issues
 
 If you find a bug or you need help, file an issue at the [issue tracker][GitHub Issue Tracker].
-If you feel uncomfortable using technical tools, feel free to send me an email
+If you feel uncomfortable using technical tools, feel free to send us an email
 at ntrrgx@gmail.com.
 
 ## Acknowledgment
 
-Working on this project I use/used:
+Working on this project we use/used:
 
 * [Debian](https://www.debian.org/)
 
