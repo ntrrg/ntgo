@@ -8,7 +8,7 @@ Any contribution to this project means implicitly that you accept the
 [Go]: https://golang.org/dl/
 [GolangCI Lint]: https://github.com/golangci/golangci-lint/releases
 
-* [Go][] >= 1.12
+* [Go][] >= 1.12.1
 
 * [GolangCI Lint][] >= 1.15
 
