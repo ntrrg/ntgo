@@ -263,8 +263,12 @@ func TestCp_directoryToDirectory(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	if err := os.MkdirAll(filepath.Join(dst, filepath.Base(src)), 0744); err != nil {
+		t.Fatal(err)
+	}
+
 	if err := ntos.Cp(dst, src); err != nil {
-		t.Errorf("ntos.Cp can't copy %s/ to %s/: %v", src, dst, err)
+		t.Fatalf("ntos.Cp can't copy %s/ to %s/: %v", src, dst, err)
 	}
 
 	dst = filepath.Join(dst, filepath.Base(src))

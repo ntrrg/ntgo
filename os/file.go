@@ -114,7 +114,7 @@ func copyDir(dst, src string, sfi os.FileInfo) error {
 		return fmt.Errorf("cannot copy directory %v into itself (%s)", src, dst)
 	}
 
-	if err := os.Mkdir(dst, sfi.Mode()); err != nil {
+	if err := os.MkdirAll(dst, sfi.Mode()); err != nil {
 		return err
 	}
 
@@ -133,7 +133,7 @@ func copyDir(dst, src string, sfi os.FileInfo) error {
 		dst := filepath.Clean(strings.Replace(srcpath, src, dst, 1))
 
 		if fi.IsDir() {
-			if err := os.Mkdir(dst, fi.Mode()); err != nil {
+			if err := os.MkdirAll(dst, fi.Mode()); err != nil {
 				errs = append(errs, err.Error())
 				return nil
 			}
