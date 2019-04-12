@@ -83,3 +83,5 @@ Working on this project we use/used:
 
 * [Mage](https://magefile.org/)
 
+* [Termux](https://termux.com)
+

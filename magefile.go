@@ -12,11 +12,6 @@ import (
 	"github.com/magefile/mage/target"
 )
 
-var (
-	goFiles    = getGoFiles()
-	goSrcFiles = getGoSrcFiles()
-)
-
 var Default = Build
 
 func Build() error {
@@ -26,6 +21,7 @@ func Build() error {
 // Development
 
 var (
+	goFiles      = getGoFiles()
 	coverageFile = "coverage.txt"
 )
 
@@ -34,7 +30,7 @@ func Benchmark() error {
 }
 
 func CI() {
-	mg.SerialDeps(Lint, QA, Test, Coverage.Default, Benchmark, Build)
+	mg.SerialDeps(Lint, QA, Test.Race, Coverage.Default, Benchmark, Build)
 }
 
 func Clean() {
@@ -58,7 +54,7 @@ func CoverageFile() error {
 		return err
 	}
 
-	return Test()
+	return Test{}.Default()
 }
 
 func Docs() {
@@ -81,7 +77,13 @@ func QA() error {
 	return sh.RunV("golangci-lint", "run")
 }
 
-func Test() error {
+type Test mg.Namespace
+
+func (Test) Default() error {
+	return sh.RunV("go", "test", "-coverprofile", coverageFile, "-v", "./...")
+}
+
+func (Test) Race() error {
 	return sh.RunV("go", "test", "-race", "-coverprofile", coverageFile, "-v", "./...")
 }
 
@@ -104,18 +106,4 @@ func getGoFiles() []string {
 	})
 
 	return goFiles
-}
-
-func getGoSrcFiles() []string {
-	var goSrcFiles []string
-
-	for _, path := range goFiles {
-		if !strings.HasSuffix(path, "_test.go") {
-			continue
-		}
-
-		goSrcFiles = append(goSrcFiles, path)
-	}
-
-	return goSrcFiles
 }
