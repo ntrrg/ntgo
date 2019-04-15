@@ -3,12 +3,21 @@ dist: xenial
 git:
   depth: 1
 language: go
-go: "1.12.1"
+go:
+  - "1.11"
+  - "1.12"
 env:
   - GO111MODULE=on
+before_install:
+  - wget 'https://github.com/golangci/golangci-lint/releases/download/v1.13.2/golangci-lint-1.13.2-linux-amd64.tar.gz' &&
+    tar -xf golangci-lint-1.13.2-linux-amd64.tar.gz &&
+    mkdir -p "$GOPATH/bin" &&
+    cp -f golangci-lint-1.13.2-linux-amd64/golangci-lint "$GOPATH/bin" &&
+    chmod +x "$GOPATH/bin/golangci-lint" &&
+    rm -rf golangci-lint-1.13.2-linux-amd64*
 jobs:
   include:
-    - script: ./mage -v test
+    - script: ./mage -v test:race
     - stage: "QA"
       name: "Linting"
       script: ./mage -v lint
@@ -16,6 +25,8 @@ jobs:
       script: ./mage -v coverage:default
     - name: "Benckmarks"
       script: ./mage -v benchmark
+    - name: "Code Analysis"
+      script: ./mage -v qa
     - stage: "Build"
       script: ./mage -v build
 after_success:
