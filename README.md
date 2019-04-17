@@ -6,8 +6,7 @@
 ---
 
 **Warning:** since this project is personal and experimental, it doesn't
-provide any kind of guarantee or backward compatibility. My recommendation is
-to vendor it or just copy the needed pieces of code.
+provide any kind of guarantee or backward compatibility.
 
 ---
 
@@ -16,6 +15,7 @@ structures implementations and tools commonly used by other projects.
 
 | Package | Status |
 |:-|:-|
+|`bytes` | ![API status](https://img.shields.io/badge/status-stable-brightgreen.svg) [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/bytes?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/bytes) |
 | `generics` | |
 |`generics/arithmetic` | ![API status](https://img.shields.io/badge/status-stable-brightgreen.svg) [![GoDoc](https://godoc.org/github.com/ntrrg/ntgo/generics/arithmetic?status.svg)](https://godoc.org/github.com/ntrrg/ntgo/generics/arithmetic) |
 | `net` | |
