@@ -42,10 +42,10 @@ func (bp *BufferPool) Cap() int {
 
 // Clear discards all the buffers in then pool.
 func (bp *BufferPool) Clear() {
-	clearing:
+clearing:
 	for {
 		select {
-		case <- bp.pool:
+		case <-bp.pool:
 		default:
 			break clearing
 		}
@@ -78,6 +78,6 @@ func (bp *BufferPool) Len() int {
 }
 
 func newBufferL(l int) *bytes.Buffer {
-	s := make([]byte, l)
+	s := make([]byte, 0, l)
 	return bytes.NewBuffer(s)
 }

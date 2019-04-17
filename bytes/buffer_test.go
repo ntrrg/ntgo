@@ -32,7 +32,7 @@ func TestBufferPool_Add(t *testing.T) {
 	bp.Add(nil)
 	buf := bp.Get()
 
-	if buf.Len() != max {
+	if buf.Cap() != max {
 		t.Errorf("the buffer pool created a buffer with bad size")
 	}
 
@@ -41,7 +41,7 @@ func TestBufferPool_Add(t *testing.T) {
 	bp.Add(bytes.NewBuffer(make([]byte, 15)))
 	buf = bp.Get()
 
-	if buf.Len() != max {
+	if buf.Cap() != max {
 		t.Errorf("the buffer pool reused a buffer with bad size")
 	}
 
