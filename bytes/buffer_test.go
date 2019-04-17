@@ -47,11 +47,11 @@ func TestBufferPool_Add(t *testing.T) {
 
 	// Reuse valid buffer
 
-	bp.Add(bytes.NewBuffer(make([]byte, 5)))
+	bp.Add(bytes.NewBuffer(make([]byte, 0, 5)))
 	buf = bp.Get()
 
-	if buf.Len() != 5 {
-		t.Errorf("the buffer pool didn't reused the buffer")
+	if buf.Cap() != 5 {
+		t.Errorf("the buffer pool didn't reuse the buffer")
 	}
 }
 
