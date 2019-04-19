@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [Unreleased]: https://github.com/ntrrg/ntgo/compare/v0.3.1...master
 ## [Unreleased][]
 
+### Fixed
+
+* `bytes`: BufferPool overflowing
+
 [0.3.1]: https://github.com/ntrrg/ntgo/compare/v0.3.0...v0.3.1
 ## [0.3.1][]
 

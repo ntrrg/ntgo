@@ -53,6 +53,11 @@ func TestBufferPool_Add(t *testing.T) {
 	if buf.Cap() != 5 {
 		t.Errorf("the buffer pool didn't reuse the buffer")
 	}
+
+	// Overflow pool
+
+	bp.Fill()
+	bp.Add(nil)
 }
 
 func TestBufferPool_Clear(t *testing.T) {

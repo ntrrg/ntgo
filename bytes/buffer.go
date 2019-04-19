@@ -26,6 +26,10 @@ func NewBufferPool(n, max int) *BufferPool {
 // Add appends the given buffer to the pool. If buf is nil or has more than
 // bp.max bytes, a new buffer will be used.
 func (bp *BufferPool) Add(buf *bytes.Buffer) {
+	if bp.Len() == bp.Cap() {
+		return
+	}
+
 	if buf == nil || buf.Len() > bp.max {
 		buf = newBufferL(bp.max)
 	} else {
