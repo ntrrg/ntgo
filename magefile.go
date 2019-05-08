@@ -29,8 +29,18 @@ func Benchmark() error {
 	return sh.RunV("go", "test", "-bench", ".", "-benchmem", "./...")
 }
 
-func CI() {
-	mg.SerialDeps(Lint, QA, Test.Race, Coverage.Default, Benchmark, Build)
+func CA() error {
+	return sh.RunV("golangci-lint", "run")
+}
+
+type CI mg.Namespace
+
+func (CI) Default() {
+	mg.SerialDeps(Test.Default, Lint, CA, Coverage.Default, Benchmark, Build)
+}
+
+func (CI) Race() {
+	mg.SerialDeps(Test.Race, Lint, CA, Coverage.Default, Benchmark, Build)
 }
 
 func Clean() {
@@ -71,10 +81,6 @@ func Lint() error {
 	args := []string{"-d", "-e", "-s"}
 	args = append(args, goFiles...)
 	return sh.RunV("gofmt", args...)
-}
-
-func QA() error {
-	return sh.RunV("golangci-lint", "run")
 }
 
 type Test mg.Namespace
