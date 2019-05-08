@@ -9,14 +9,11 @@ import (
 	"github.com/ntrrg/ntgo/generics/arithmetic"
 )
 
-// For BytesSum see operander_example_test.go
-
 func TestGetVal(t *testing.T) {
 	cases := []struct {
 		in   interface{}
 		want float64
 	}{
-		{BytesSum("hello"), 532},
 		{true, 1},
 		{int(1), 1},
 		{int8(2), 2},
@@ -54,5 +51,21 @@ func TestGetVal(t *testing.T) {
 		if got != c.want {
 			t.Errorf("%v == %v, want %v", c.in, got, c.want)
 		}
+	}
+}
+
+func TestEq(t *testing.T) {
+	if !arithmetic.Eq(true, 1, []byte{'M'}) ||
+		arithmetic.Eq(true, false, 1) ||
+		!arithmetic.Eq(false, 0, []byte{}, struct{}{}, func() {}) {
+		t.Errorf("equality is not working as it should")
+	}
+}
+
+func TestNe(t *testing.T) {
+	if arithmetic.Ne(true, 1, []byte{'M'}) ||
+		!arithmetic.Ne(false, true, []byte{'M', 'A'}) ||
+		arithmetic.Ne(false, 0, []byte{}, struct{}{}, func() {}) {
+		t.Errorf("inequality is not working as it should")
 	}
 }

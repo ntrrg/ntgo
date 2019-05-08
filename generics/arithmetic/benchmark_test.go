@@ -9,14 +9,11 @@ import (
 	"github.com/ntrrg/ntgo/generics/arithmetic"
 )
 
-// For BytesSum see operander_example_test.go
-
 func BenchmarkGetVal(b *testing.B) {
 	cases := []struct {
 		name string
 		val  interface{}
 	}{
-		{"Operander", BytesSum("hello")},
 		{"Bool", true},
 		{"Int", int(1)},
 		{"Int8", int8(2)},

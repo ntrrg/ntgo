@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [Unreleased]: https://github.com/ntrrg/ntgo/compare/v0.3.1...master
 ## [Unreleased][]
 
+### Add
+
+* `generics/arithmetic`: Add Ne function
+
+### Changed
+
+* `generics/arithmetic`: Improve package structure
+
 ### Fixed
 
 * `bytes`: BufferPool overflowing
