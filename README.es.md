@@ -33,7 +33,7 @@ otros proyectos.
 [GitHub Issue Tracker]: https://github.com/ntrrg/ntgo/issues
 
 Si encuentra algún error o necesita ayuda, cree un issue en el [issue tracker][GitHub Issue Tracker].
-Si no se siente comodo usando herramientas técnicas, puede enviarnos un correo
+Si no se siente cómodo usando herramientas técnicas, puede enviarnos un correo
 electrónico a ka dirección ntrrgx@gmail.com
 
 ## Atribuciones
