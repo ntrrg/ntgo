@@ -4,4 +4,4 @@
 /*
 Package bytes implements functions for the manipulation of byte slices.
 */
-package bytes
+package bytes // import "nt.web.ve/go/ntgo/bytes"

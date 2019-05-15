@@ -6,7 +6,7 @@ package arithmetic_test
 import (
 	"fmt"
 
-	"github.com/ntrrg/ntgo/generics/arithmetic"
+	"nt.web.ve/go/ntgo/generics/arithmetic"
 )
 
 // BytesSum is a simple string implementation of arithmetic.Operander. Its

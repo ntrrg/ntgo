@@ -6,7 +6,7 @@ package arithmetic_test
 import (
 	"testing"
 
-	"github.com/ntrrg/ntgo/generics/arithmetic"
+	"nt.web.ve/go/ntgo/generics/arithmetic"
 )
 
 func TestGetVal(t *testing.T) {

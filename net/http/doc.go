@@ -5,4 +5,4 @@
 Package http provides HTTP server implementation based on http package from
 the stdlib.
 */
-package http
+package http // import "nt.web.ve/go/ntgo/net/http"

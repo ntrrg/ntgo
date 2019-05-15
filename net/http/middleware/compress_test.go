@@ -9,7 +9,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/ntrrg/ntgo/net/http/middleware"
+	"nt.web.ve/go/ntgo/net/http/middleware"
 )
 
 func TestGzip(t *testing.T) {
