@@ -10,4 +10,4 @@ Div). Other helper functions are provided too. Since there are some data types
 without an arithmetical representation, some rules are applied during the value
 extraction (see GetVal).
 */
-package arithmetic // import "nt.web.ve/go/ntgo/generics/arithmetic"
+package arithmetic // import "nt.web.ve/go/ntgo/reflect/arithmetic"

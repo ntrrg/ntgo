@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
+* `generics/arithmetic`: Renamed to `reflect/arithmetic`
 * `generics/arithmetic`: Improve package structure
 
 ### Fixed
@@ -50,6 +51,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-* `container/arithmetic`: Renamed package `container/arithmetic` to
-  `generics/arithmetic`
+* `container/arithmetic`: Renamed to `generics/arithmetic`
 

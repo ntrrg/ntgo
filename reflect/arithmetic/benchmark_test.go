@@ -6,7 +6,7 @@ package arithmetic_test
 import (
 	"testing"
 
-	"nt.web.ve/go/ntgo/generics/arithmetic"
+	"nt.web.ve/go/ntgo/reflect/arithmetic"
 )
 
 func BenchmarkGetVal(b *testing.B) {
