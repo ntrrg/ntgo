@@ -7,16 +7,10 @@
 implementaciones de estructuras de datos y herramientas usadas regularmente por
 otros proyectos.
 
-<div class="note">
-  <header>
-    Advertencia
-  </header>
-
-  <main>
-    Como este es un proyecto personal y experimental, no se provee ningún tipo
-    de garantía o compatibilidad.
-  </main>
-</div>
+{{% note "Advertencia" %}}
+Como este es un proyecto personal y experimental, no se provee ningún tipo de
+garantía o compatibilidad.
+{{% /note %}}
 
 | Paquete | Estatus |
 | :-- | :-- |
@@ -35,6 +29,11 @@ otros proyectos.
 Si encuentra algún error o necesita ayuda, cree un issue en el [issue tracker][GitHub Issue Tracker].
 Si no se siente cómodo usando herramientas técnicas, puede enviarnos un correo
 electrónico a ka dirección ntrrgx@gmail.com
+
+# Contribuir
+
+Ver la [guía de contribución](https://github.com/ntrrg/ntgo/blob/master/CONTRIBUTING.md)
+para más información.
 
 ## Atribuciones
 

@@ -6,16 +6,10 @@
 **ntgo** is a collection of packages that provides network utilities, data
 structures implementations and tools commonly used by other projects.
 
-<div class="note">
-  <header>
-    Warning
-  </header>
-
-  <main>
-    Since this project is personal and experimental, it doesn't provide any
-    kind of guarantee or backward compatibility.
-  </main>
-</div>
+{{% note "Warning" %}}
+Since this project is personal and experimental, it doesn't provide any kind of
+guarantee or backward compatibility.
+{{% /note %}}
 
 | Package | Status |
 | :-- | :-- |
@@ -34,6 +28,11 @@ structures implementations and tools commonly used by other projects.
 If you find a bug or you need help, file an issue at the [issue tracker][GitHub Issue Tracker].
 If you feel uncomfortable using technical tools, feel free to send us an email
 at ntrrgx@gmail.com.
+
+# Contributing
+
+See the [contribution guide](https://github.com/ntrrg/ntgo/blob/master/CONTRIBUTING.md)
+for more information.
 
 ## Acknowledgment
 
