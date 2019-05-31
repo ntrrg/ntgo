@@ -9,6 +9,8 @@ kinds:
 techs:
   - mage
   - go
+  - golangci
+  - travis
 ---
 
 [![Travis build btatus](https://travis-ci.com/ntrrg/ntgo.svg?branch=master)](https://travis-ci.com/ntrrg/ntgo)
@@ -34,7 +36,7 @@ guarantee or backward compatibility.
 | `reflect` | |
 | `reflect/arithmetic` | ![API status](https://img.shields.io/badge/status-stable-brightgreen.svg) [![GoDoc](https://godoc.org/nt.web.ve/go/ntgo/reflect/arithmetic?status.svg)](https://godoc.org/nt.web.ve/go/ntgo/reflect/arithmetic) |
 
-## Support
+# Support
 
 [GitHub Issue Tracker]: https://github.com/ntrrg/ntgo/issues
 
@@ -47,7 +49,7 @@ at ntrrgx@gmail.com.
 See the [contribution guide](https://github.com/ntrrg/ntgo/blob/master/CONTRIBUTING.md)
 for more information.
 
-## Acknowledgment
+# Acknowledgment
 
 Working on this project we use/used:
 

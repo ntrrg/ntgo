@@ -9,6 +9,8 @@ kinds:
 techs:
   - mage
   - go
+  - golangci
+  - travis
 ---
 
 [![Travis build btatus](https://travis-ci.com/ntrrg/ntgo.svg?branch=master)](https://travis-ci.com/ntrrg/ntgo)
@@ -35,7 +37,7 @@ garantía o compatibilidad.
 | `net/http/middleware` | ![API status](https://img.shields.io/badge/status-testing-yellow.svg) [![GoDoc](https://godoc.org/nt.web.ve/go/ntgo/net/http/middleware?status.svg)](https://godoc.org/nt.web.ve/go/ntgo/net/http/middleware) |
 | `os` | ![API status](https://img.shields.io/badge/status-stable-brightgreen.svg) [![GoDoc](https://godoc.org/nt.web.ve/go/ntgo/os?status.svg)](https://godoc.org/nt.web.ve/go/ntgo/os) |
 
-## Soporte
+# Soporte
 
 [GitHub Issue Tracker]: https://github.com/ntrrg/ntgo/issues
 
@@ -48,9 +50,9 @@ electrónico a ka dirección ntrrgx@gmail.com
 Ver la [guía de contribución](https://github.com/ntrrg/ntgo/blob/master/CONTRIBUTING.md)
 para más información.
 
-## Atribuciones
+# Atribuciones
 
-Trabando en este proyecto uso/usé:
+Trabando en este proyecto usamos:
 
 * [Debian](https://www.debian.org/)
 
