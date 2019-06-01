@@ -6,5 +6,5 @@
 **ntgo** is a collection of packages that provides network utilities, data
 structures implementations and tools commonly used by other projects.
 
-See https://nt.web.ve/en/projects/ntgo/
+See <https://nt.web.ve/en/projects/ntgo/>
 
