@@ -18,7 +18,7 @@ techs:
 [![GolangCI](https://golangci.com/badges/github.com/ntrrg/ntgo.svg)](https://golangci.com/r/github.com/ntrrg/ntgo)
 [![BCH compliance](https://bettercodehub.com/edge/badge/ntrrg/ntgo?branch=master)](https://bettercodehub.com/results/ntrrg/ntgo)
 
-**ntgo** es un conjunto de paquetes que provee utilidades de red,
+**ntgo** es un conjunto de paquetes Go que provee utilidades de red,
 implementaciones de estructuras de datos y herramientas usadas regularmente por
 otros proyectos.
 
@@ -42,8 +42,8 @@ garantía o compatibilidad.
 [GitHub Issue Tracker]: https://github.com/ntrrg/ntgo/issues
 
 Si encuentra algún error o necesita ayuda, cree un issue en el [issue tracker][GitHub Issue Tracker].
-Si no se siente cómodo usando herramientas técnicas, puede enviarnos un correo
-electrónico a ka dirección ntrrgx@gmail.com
+Si usar herramientas técnicas no es su estilo, puede enviarnos un correo
+electrónico a la dirección ntrrgx@gmail.com
 
 # Contribuir
 
