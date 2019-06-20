@@ -38,9 +38,7 @@ guarantee or backward compatibility.
 
 # Support
 
-[GitHub Issue Tracker]: https://github.com/ntrrg/ntgo/issues
-
-If you need help or find a bug, file an issue at the [issue tracker][GitHub Issue Tracker].
+If you need help or find a bug, file an issue at the [issue tracker](https://github.com/ntrrg/ntgo/issues).
 If using technical tools is not your style, feel free to send us an email at
 ntrrgx@gmail.com.
 

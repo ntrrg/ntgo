@@ -29,8 +29,6 @@ Any contribution to this project means implicitly that you accept the
 
 ## Instructions
 
-[Pull Request]: https://github.com/ntrrg/ntgo/compare
-
 1. Create a new branch with a short name that describes the changes that you
    intend to do. If you don't have permissions to create branches, fork the
    project and do the same in your forked copy.
@@ -41,5 +39,6 @@ Any contribution to this project means implicitly that you accept the
    doesn't support the Go's race conditions detector) in the project root
    folder to verify that everything is working.
 
-4. Create a [pull request][Pull Request] to the `master` branch.
+4. Create a [pull request](https://github.com/ntrrg/ntgo/compare) to the
+   `master` branch.
 
