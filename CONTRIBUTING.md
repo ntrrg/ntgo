@@ -35,7 +35,7 @@ Any contribution to this project means implicitly that you accept the
 
 2. Do any change you need to do and add the respective tests.
 
-3. (Optional) Run `./mage ci:race` (or `./mage ci:default` if your platform
+3. **(Optional)** Run `./mage ci:race` (or `./mage ci:default` if your platform
    doesn't support the Go's race conditions detector) in the project root
    folder to verify that everything is working.
 
