@@ -1,10 +1,9 @@
-[![Travis build status](https://travis-ci.com/ntrrg/ntgo.svg?branch=master)](https://travis-ci.com/ntrrg/ntgo)
+[![GitHub Actions](https://github.com/ntrrg/ntgo/workflows/Go/badge.svg)](https://github.com/ntrrg/ntgo/actions?query=workflow:Go)
 [![codecov](https://codecov.io/gh/ntrrg/ntgo/branch/master/graph/badge.svg)](https://codecov.io/gh/ntrrg/ntgo)
-[![GolangCI](https://golangci.com/badges/github.com/ntrrg/ntgo.svg)](https://golangci.com/r/github.com/ntrrg/ntgo)
-[![BCH compliance](https://bettercodehub.com/edge/badge/ntrrg/ntgo?branch=master)](https://bettercodehub.com/results/ntrrg/ntgo)
+[![GoDoc](https://godoc.org/go.ntrrg.dev/ntgo?status.svg)](https://godoc.org/nt.web.ve/go/sdb/pkg/sdb)
 
 **ntgo** is a collection of packages that provides network utilities, data
 structures implementations and tools commonly used by other projects.
 
-See <https://nt.web.ve/en/projects/ntgo/>
+See <https://ntrrg.dev/en/projects/ntgo/>
 

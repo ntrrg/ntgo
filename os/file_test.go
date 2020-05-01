@@ -13,7 +13,7 @@ import (
 	"strings"
 	"testing"
 
-	ntos "nt.web.ve/go/ntgo/os"
+	ntos "go.ntrrg.dev/ntgo/os"
 )
 
 func TestCp_noSource(t *testing.T) {

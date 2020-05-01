@@ -9,7 +9,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"nt.web.ve/go/ntgo/net/http/middleware"
+	"go.ntrrg.dev/ntgo/net/http/middleware"
 )
 
 func TestReplace(t *testing.T) {

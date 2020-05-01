@@ -5,4 +5,4 @@
 Package os provides a platform-independent interface to operating system
 functionality.
 */
-package os // import "nt.web.ve/go/ntgo/os"
+package os

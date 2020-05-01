@@ -24,20 +24,20 @@ import (
 // * [FAIL] Bad permissions.
 //
 // * [PASS] File to non existent file, dst will be created with the same
-// content as src.
+//          content as src.
 //
 // * [PASS] File to file, dst will be overwritten by src.
 //
 // * [PASS] File to directory, dst will be a file inside dst with the same base
-// name as src.
+//          name as src.
 //
 // * [FAIL] Directory to file.
 //
 // * [PASS] Directory to non existent directory, dst will be created with the
-// same content as src.
+//          same content as src.
 //
 // * [PASS] Directory to directory, dst will be a directory inside dst with the
-// same base name as src.
+//          same base name as src.
 //
 // * [FAIL] Directory to itself.
 //
@@ -46,7 +46,7 @@ import (
 // * [FAIL] Multiple elements to non existent directory.
 //
 // * [PASS] Multiple elements to directory, any src elements will be
-// created/overwritten in dst.
+//          created/overwritten in dst.
 func Cp(dst string, src ...string) error {
 	dfi, err := os.Stat(dst)
 	if err != nil && !os.IsNotExist(err) {
@@ -130,15 +130,15 @@ func copyDir(dst, src string, sfi os.FileInfo) error {
 			return nil
 		}
 
-		dst := filepath.Clean(strings.Replace(srcpath, src, dst, 1))
+		dest := filepath.Clean(strings.Replace(srcpath, src, dst, 1))
 
 		if fi.IsDir() {
-			if err := os.MkdirAll(dst, fi.Mode()); err != nil {
+			if err := os.MkdirAll(dest, fi.Mode()); err != nil {
 				errs = append(errs, err.Error())
 				return nil
 			}
 		} else {
-			if err := copyFile(dst, srcpath, fi); err != nil {
+			if err := copyFile(dest, srcpath, fi); err != nil {
 				errs = append(errs, err.Error())
 				return nil
 			}

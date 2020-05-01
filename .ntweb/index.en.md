@@ -7,34 +7,30 @@ metadata:
 kinds:
   - library
 techs:
-  - mage
   - go
-  - golangci
-  - travis
 ---
 
-[![Travis build btatus](https://travis-ci.com/ntrrg/ntgo.svg?branch=master)](https://travis-ci.com/ntrrg/ntgo)
+[![GitHub Actions](https://github.com/ntrrg/ntgo/workflows/Go/badge.svg)](https://github.com/ntrrg/ntgo/actions?query=workflow:Go)
 [![codecov](https://codecov.io/gh/ntrrg/ntgo/branch/master/graph/badge.svg)](https://codecov.io/gh/ntrrg/ntgo)
-[![GolangCI](https://golangci.com/badges/github.com/ntrrg/ntgo.svg)](https://golangci.com/r/github.com/ntrrg/ntgo)
-[![BCH compliance](https://bettercodehub.com/edge/badge/ntrrg/ntgo?branch=master)](https://bettercodehub.com/results/ntrrg/ntgo)
+[![GoDoc](https://godoc.org/go.ntrrg.dev/ntgo?status.svg)](https://godoc.org/nt.web.ve/go/sdb/pkg/sdb)
 
 **ntgo** is a collection of Go packages that provides network utilities, data
 structures implementations and tools commonly used by other projects.
 
-{{% note "Warning" %}}
+{{< note "Warning" >}}
 Since this project is personal and experimental, it doesn't provide any kind of
 guarantee or backward compatibility.
-{{% /note %}}
+{{< /note >}}
 
 | Package | Status |
 | :-- | :-- |
-| `bytes` | ![API status](https://img.shields.io/badge/status-stable-brightgreen.svg) [![GoDoc](https://godoc.org/nt.web.ve/go/ntgo/bytes?status.svg)](https://godoc.org/nt.web.ve/go/ntgo/bytes) |
+| `bytes` | ![API status](https://img.shields.io/badge/status-stable-brightgreen.svg) [![GoDoc](https://godoc.org/ntrrg.dev/go/ntgo/bytes?status.svg)](https://godoc.org/ntrrg.dev/go/ntgo/bytes) |
 | `net` | |
-| `net/http` | ![API status](https://img.shields.io/badge/status-unstable-red.svg) [![GoDoc](https://godoc.org/nt.web.ve/go/ntgo/net/http?status.svg)](https://godoc.org/nt.web.ve/go/ntgo/net/http) |
-| `net/http/middleware` | ![API status](https://img.shields.io/badge/status-testing-yellow.svg) [![GoDoc](https://godoc.org/nt.web.ve/go/ntgo/net/http/middleware?status.svg)](https://godoc.org/nt.web.ve/go/ntgo/net/http/middleware) |
-| `os` | ![API status](https://img.shields.io/badge/status-stable-brightgreen.svg) [![GoDoc](https://godoc.org/nt.web.ve/go/ntgo/os?status.svg)](https://godoc.org/nt.web.ve/go/ntgo/os) |
+| `net/http` | ![API status](https://img.shields.io/badge/status-unstable-red.svg) [![GoDoc](https://godoc.org/ntrrg.dev/go/ntgo/net/http?status.svg)](https://godoc.org/ntrrg.dev/go/ntgo/net/http) |
+| `net/http/middleware` | ![API status](https://img.shields.io/badge/status-testing-yellow.svg) [![GoDoc](https://godoc.org/ntrrg.dev/go/ntgo/net/http/middleware?status.svg)](https://godoc.org/ntrrg.dev/go/ntgo/net/http/middleware) |
+| `os` | ![API status](https://img.shields.io/badge/status-stable-brightgreen.svg) [![GoDoc](https://godoc.org/ntrrg.dev/go/ntgo/os?status.svg)](https://godoc.org/ntrrg.dev/go/ntgo/os) |
 | `reflect` | |
-| `reflect/arithmetic` | ![API status](https://img.shields.io/badge/status-stable-brightgreen.svg) [![GoDoc](https://godoc.org/nt.web.ve/go/ntgo/reflect/arithmetic?status.svg)](https://godoc.org/nt.web.ve/go/ntgo/reflect/arithmetic) |
+| `reflect/arithmetic` | ![API status](https://img.shields.io/badge/status-stable-brightgreen.svg) [![GoDoc](https://godoc.org/ntrrg.dev/go/ntgo/reflect/arithmetic?status.svg)](https://godoc.org/ntrrg.dev/go/ntgo/reflect/arithmetic) |
 
 # Support
 

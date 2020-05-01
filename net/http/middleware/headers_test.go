@@ -8,7 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"nt.web.ve/go/ntgo/net/http/middleware"
+	"go.ntrrg.dev/ntgo/net/http/middleware"
 )
 
 func TestAddHeader(t *testing.T) {
@@ -35,11 +35,13 @@ func TestAddHeader(t *testing.T) {
 		w := httptest.NewRecorder()
 		r := httptest.NewRequest(http.MethodHead, "/", nil)
 		h.ServeHTTP(w, r)
-		res := w.Result().Header[c.key]
+		res := w.Result()
+		defer res.Body.Close()
+		header := res.Header[c.key]
 
-		if len(res) != len(c.values) {
+		if len(header) != len(c.values) {
 			msg := "TC#%v: len(%+v) got %v, want %v"
-			t.Errorf(msg, i, res, len(res), len(c.values))
+			t.Errorf(msg, i, header, len(header), len(c.values))
 		}
 	}
 }
@@ -69,10 +71,12 @@ func TestCache(t *testing.T) {
 		w := httptest.NewRecorder()
 		r := httptest.NewRequest(c.method, "/", nil)
 		h.ServeHTTP(w, r)
-		res := w.Result().Header.Get("Cache-Control")
+		res := w.Result()
+		defer res.Body.Close()
+		header := res.Header.Get("Cache-Control")
 
-		if res != c.want {
-			t.Errorf("TC#%v: 'Cache-Control' == %v, want: %v", i, res, c.want)
+		if header != c.want {
+			t.Errorf("TC#%v: 'Cache-Control' == %v, want: %v", i, header, c.want)
 		}
 	}
 }
@@ -90,10 +94,12 @@ func TestDelHeader(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest(http.MethodHead, "/", nil)
 	h.ServeHTTP(w, r)
-	res := w.Result().Header.Get(key)
+	res := w.Result()
+	defer res.Body.Close()
+	header := res.Header.Get(key)
 
-	if res != "" {
-		t.Errorf("The 'X-Header' header stills have values: %v", res)
+	if header != "" {
+		t.Errorf("The 'X-Header' header stills have values: %v", header)
 	}
 }
 

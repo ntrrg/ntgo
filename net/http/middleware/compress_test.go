@@ -9,7 +9,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"nt.web.ve/go/ntgo/net/http/middleware"
+	"go.ntrrg.dev/ntgo/net/http/middleware"
 )
 
 func TestGzip(t *testing.T) {
@@ -45,6 +45,8 @@ consequat.
 	}
 
 	for i, c := range cases {
+		i, c := i, c
+
 		h := middleware.AdaptFunc(
 			func(w http.ResponseWriter, r *http.Request) {
 				if _, err := w.Write([]byte(c.in)); err != nil {
@@ -59,7 +61,10 @@ consequat.
 		r := httptest.NewRequest(http.MethodGet, "/", nil)
 		r.Header.Set("Accept-Encoding", "gzip")
 		h.ServeHTTP(w, r)
+
 		res := w.Result()
+		defer res.Body.Close()
+
 		gzdata, err := ioutil.ReadAll(res.Body)
 
 		if err != nil {
@@ -82,6 +87,7 @@ func TestGzip_noHeader(t *testing.T) {
 	r := httptest.NewRequest(http.MethodGet, "/", nil)
 	h.ServeHTTP(w, r)
 	res := w.Result()
+	defer res.Body.Close()
 
 	if res.Header.Get("Content-Encoding") == "gzip" {
 		t.Error("The response should not be compressed")

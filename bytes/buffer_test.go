@@ -7,7 +7,7 @@ import (
 	"bytes"
 	"testing"
 
-	ntbytes "nt.web.ve/go/ntgo/bytes"
+	ntbytes "go.ntrrg.dev/ntgo/bytes"
 )
 
 func TestNewBufferPool(t *testing.T) {
