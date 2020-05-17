@@ -1,13 +1,11 @@
 ---
 title: ntgo
 description: Un conjunto de paquetes Go.
-metadata:
-  source-code: https://github.com/ntrrg/ntgo
-  license: MIT
-kinds:
+tags:
   - biblioteca
-techs:
   - go
+toc: true
+comments: true
 ---
 
 [![GitHub Actions](https://github.com/ntrrg/ntgo/workflows/Go/badge.svg)](https://github.com/ntrrg/ntgo/actions?query=workflow:Go)
@@ -18,10 +16,10 @@ techs:
 implementaciones de estructuras de datos y herramientas usadas regularmente por
 otros proyectos.
 
-{{< note "Advertencia" >}}
+{{% note title="Advertencia" class="warning" %}}
 Como este es un proyecto personal y experimental, no se provee ningún tipo de
 garantía o compatibilidad.
-{{< /note >}}
+{{% /note %}}
 
 | Paquete | Estatus |
 | :-- | :-- |
