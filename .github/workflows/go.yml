@@ -25,6 +25,7 @@ jobs:
 
       - name: Set up tools
         run: |
+          export GO111MODULE="on"
           go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.21.0
 
       - name: Get source code
@@ -51,3 +52,4 @@ jobs:
 
       - name: Benchmarks
         run: make benchmark
+

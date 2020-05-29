@@ -1,8 +1,7 @@
 run:
   tests: true
   skip-files:
-    - mage.go
-    - magefile.go
+    - .mage/magefile.go
 linters-settings:
   errcheck:
     check-type-assertions: true
@@ -35,3 +34,4 @@ issues:
         - gocognit
         - funlen
         - lll
+

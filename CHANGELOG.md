@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [Unreleased]: https://github.com/ntrrg/ntgo/compare/v0.5.0...master
 ## [Unreleased][]
 
+### Changed
+
+* Improve project structure
+
 [0.5.0]: https://github.com/ntrrg/ntgo/compare/v0.4.1...v0.5.0
 ## [0.5.0][]
 

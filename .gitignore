@@ -1,4 +1,5 @@
 nogit-*
+coverage.txt
 
 #######################
 # Frameworks and libs #
@@ -25,3 +26,4 @@ Session.vim
 
 # MacOS
 .DS_Store
+

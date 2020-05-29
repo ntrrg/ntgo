@@ -1,10 +1,10 @@
-pkgName := ntgo
+module := $(shell go list -m)
 hugoPort := 1313
 godocPort := 6060
 
 goAllFiles := $(filter-out ./vendor/%, $(shell find . -iname "*.go" -type f))
 goSrcFiles := $(shell go list -f "{{ \$$path := .Dir }}{{ range .GoFiles }}{{ \$$path }}/{{ . }} {{ end }}" ./...)
-goTestFiles := $(shell go list -f "{{ \$$path := .Dir }}{{ range .TestGoFiles }}{{ \$$path }}/{{ . }} {{ end }} {{ range .XTestGoFiles }}{{ \$$path }}/{{ . }} {{ end }}" ./...)
+goTestFiles := $(shell go list -f "{{ \$$path := .Dir }}{{ range .TestGoFiles }}{{ \$$path }}/{{ . }} {{ end }}{{ range .XTestGoFiles }}{{ \$$path }}/{{ . }} {{ end }}" ./...)
 
 .PHONY: all
 all: build
@@ -14,53 +14,52 @@ build:
 	go build ./...
 
 .PHONY: clean
-clean:
-	rm -rf dist/
+clean: clean-dev
 
 .PHONY: doc
 doc:
-	@echo "Go to http://localhost:$(hugoPort)/en/projects/$(pkgName)/"
-	@echo "Ir a http://localhost:$(hugoPort)/es/projects/$(pkgName)/"
+	@echo "Go to http://localhost:$(hugoPort)/en/projects/$(basename $(module))/"
+	@echo "Ir a http://localhost:$(hugoPort)/es/projects/$(basename $(module))/"
 	@docker run --rm -it \
 		-e PORT=$(hugoPort) \
 		-p $(hugoPort):$(hugoPort) \
-		-v "$$PWD/.ntweb":/site/content/projects/$(pkgName)/ \
+		-v "$$PWD/.ntweb":/site/content/projects/$(basename $(module))/ \
 		ntrrg/ntweb:editing --port $(hugoPort)
 
 .PHONE: doc-go
 doc-go:
-	@echo "Go to http://localhost:$(godocPort)/pkg/$(shell go list -m)/"
+	@echo "Go to http://localhost:$(godocPort)/pkg/$(module)/"
 	godoc -http :$(godocPort) -play
 
 # Development
 
-coverage_file := coverage.txt
 CI_TARGET ?= ./...
+COVERAGE_FILE ?= coverage.txt
 
 .PHONY: benchmark
 benchmark:
-	go test -v -bench . -benchmem $(CI_TARGET)
+	go test -v -bench . -benchmem -run none $(CI_TARGET)
 
 .PHONY: ca
 ca:
 	golangci-lint run
 
 .PHONY: ci
-ci: clean-dev test lint ca coverage benchmark build
+ci: test lint ca coverage benchmark build
 
 .PHONY: ci-race
-ci-race: clean-dev test-race lint ca coverage benchmark build
+ci-race: test-race lint ca coverage benchmark build
 
 .PHONY: clean-dev
 clean-dev: clean
-	rm -rf $(coverage_file)
+	rm -rf $(COVERAGE_FILE)
 
 .PHONY: coverage
-coverage: $(coverage_file)
+coverage: $(COVERAGE_FILE)
 	go tool cover -func $<
 
 .PHONY: coverage-web
-coverage-web: $(coverage_file)
+coverage-web: $(COVERAGE_FILE)
 	go tool cover -html $<
 
 .PHONY: format
@@ -87,6 +86,6 @@ watch:
 watch-race:
 	reflex -d "none" -r '\.go$$' -- $(MAKE) -s test-race lint
 
-$(coverage_file): $(goSrcFiles) $(goTestFiles)
-	go test -coverprofile $(coverage_file) $(CI_TARGET)
+$(COVERAGE_FILE): $(goSrcFiles) $(goTestFiles)
+	go test -coverprofile $@ $(CI_TARGET)
 
