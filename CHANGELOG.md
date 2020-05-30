@@ -10,14 +10,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
+* `reflect/arithmetic`: Renamed `GetVal` to `Val`
 * Improve project structure
+
+### Fixed
+
+* `reflect/arithmetic`: Panics with zero operanders
 
 [0.5.0]: https://github.com/ntrrg/ntgo/compare/v0.4.1...v0.5.0
 ## [0.5.0][]
 
 ### Changed
 
-* Migrate domain
+* Migrate module domain
 * Improve project documentation and structure
 
 [0.4.1]: https://github.com/ntrrg/ntgo/compare/v0.4.0...v0.4.1
@@ -32,11 +37,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Add
 
-* `generics/arithmetic`: Add Ne function
+* `generics/arithmetic`: Add `Ne` function
 
 ### Changed
 
-* `generics/arithmetic`: Renamed to `reflect/arithmetic`
+* `generics/arithmetic`: Rename to `reflect/arithmetic`
 * `generics/arithmetic`: Improve package structure
 
 ### Fixed
@@ -69,7 +74,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-* `os`: Cp helper
+* `os`: `Cp` helper
 
 ### Changed
 

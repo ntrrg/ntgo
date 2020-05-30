@@ -8,7 +8,7 @@ import (
 )
 
 // Operander is the interface that wraps the arithmetic representation method.
-// It is useful for adding custom behavior to named types when GetVal processes
+// It is useful for adding custom behavior to named types when Val processes
 // it, other wise, the underlying type is obtained and follows the extraction
 // rules.
 //
@@ -19,10 +19,14 @@ type Operander interface {
 
 // Add gets any number of elements and returns their addition.
 func Add(operanders ...interface{}) float64 {
-	result := GetVal(operanders[0])
+	if len(operanders) < 1 {
+		return 0
+	}
+
+	result := Val(operanders[0])
 
 	for _, v := range operanders[1:] {
-		result += GetVal(v)
+		result += Val(v)
 	}
 
 	return result
@@ -30,10 +34,14 @@ func Add(operanders ...interface{}) float64 {
 
 // Div gets any number of elements and returns their division.
 func Div(operanders ...interface{}) float64 {
-	result := GetVal(operanders[0])
+	if len(operanders) < 1 {
+		return 0
+	}
+
+	result := Val(operanders[0])
 
 	for _, v := range operanders[1:] {
-		result /= GetVal(v)
+		result /= Val(v)
 	}
 
 	return result
@@ -41,10 +49,14 @@ func Div(operanders ...interface{}) float64 {
 
 // Eq gets any number of elements and checks if they are equals.
 func Eq(operanders ...interface{}) bool {
-	x := GetVal(operanders[0])
+	if len(operanders) < 2 {
+		return true
+	}
+
+	x := Val(operanders[0])
 
 	for _, v := range operanders[1:] {
-		if x != GetVal(v) {
+		if x != Val(v) {
 			return false
 		}
 	}
@@ -54,10 +66,14 @@ func Eq(operanders ...interface{}) bool {
 
 // Mul gets any number of elements and returns their multiplication.
 func Mul(operanders ...interface{}) float64 {
-	result := GetVal(operanders[0])
+	if len(operanders) < 1 {
+		return 0
+	}
+
+	result := Val(operanders[0])
 
 	for _, v := range operanders[1:] {
-		result *= GetVal(v)
+		result *= Val(v)
 	}
 
 	return result
@@ -65,16 +81,20 @@ func Mul(operanders ...interface{}) float64 {
 
 // Ne gets any number of elements and checks if they are differents.
 func Ne(operanders ...interface{}) bool {
-	s := make(map[float64]struct{})
+	if len(operanders) < 2 {
+		return false
+	}
+
+	s := make(map[float64]struct{}, len(operanders))
 
 	for _, v := range operanders {
-		ar := GetVal(v)
+		val := Val(v)
 
-		if _, ok := s[ar]; ok {
+		if _, ok := s[val]; ok {
 			return false
 		}
 
-		s[ar] = struct{}{}
+		s[val] = struct{}{}
 	}
 
 	return true
@@ -82,41 +102,22 @@ func Ne(operanders ...interface{}) bool {
 
 // Sub gets any number of elements and returns their subtraction.
 func Sub(operanders ...interface{}) float64 {
-	result := GetVal(operanders[0])
+	if len(operanders) < 1 {
+		return 0
+	}
+
+	result := Val(operanders[0])
 
 	for _, v := range operanders[1:] {
-		result -= GetVal(v)
+		result -= Val(v)
 	}
 
 	return result
 }
 
-/*
-GetVal extracts the arithmetic representation from any type. It is ruled by the
-value extraction rules.
-
-Value extraction rules
-
-1. Any element that satisfies the Operander interface will obtain its value
-from the Val method.
-
-2. Any element with a named type that doesn't satisfies the Operander interface
-will obtain its value from its underlying type.
-
-3. Boolean elements with a true value will be represented as 1, for false
-values they will be 0.
-
-4. Numeric elements (int, int8, int16, int32, int64, uint, uint8, uint16,
-uint32, uint64, float32, float64, complex64, complex128, byte, rune) will be
-converted to float64, but complex numbers will be represented by their real
-part in float64 form.
-
-5. Composed (arrays, maps, slices, strings, structs) and channel elements will
-be represented by their length (or their number of fields for structs).
-
-6. Any other element will be 0.
-*/
-func GetVal(operander interface{}) float64 {
+// Val extracts the arithmetic representation from any type. It is ruled by the
+// value extraction rules.
+func Val(operander interface{}) float64 {
 	if x, ok := operander.(Operander); ok {
 		return x.Val()
 	}
