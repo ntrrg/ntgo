@@ -7,12 +7,7 @@ import (
 	"reflect"
 )
 
-// Operander is the interface that wraps the arithmetic representation method.
-// It is useful for adding custom behavior to named types when Val processes
-// it, other wise, the underlying type is obtained and follows the extraction
-// rules.
-//
-// Val returns the variable's arithmetic representation (float64).
+// An Operander is a value that can be represented as an arithmetic operand.
 type Operander interface {
 	Val() float64
 }
@@ -124,6 +119,7 @@ func Val(operander interface{}) float64 {
 
 	x := reflect.ValueOf(operander)
 
+	// nolint:exhaustive
 	switch x.Kind() {
 	case reflect.Bool:
 		if x.Bool() {
@@ -131,7 +127,8 @@ func Val(operander interface{}) float64 {
 		}
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
 		return float64(x.Int())
-	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
+	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32,
+		reflect.Uint64:
 		return float64(x.Uint())
 	case reflect.Float32, reflect.Float64:
 		return x.Float()

@@ -25,7 +25,10 @@ func ExampleAdapt() {
 	r := httptest.NewRequest(http.MethodGet, "/", nil)
 	r.Header.Set("Accept-Encoding", "gzip")
 	h.ServeHTTP(w, r)
+
 	res := w.Result()
+	defer res.Body.Close()
+
 	fmt.Printf("Status: %v\n", res.Status)
 	fmt.Printf("Cache-Control: %+v\n", res.Header.Get("Cache-Control"))
 	fmt.Printf("Content-Encoding: %v", res.Header.Get("Content-Encoding"))
@@ -47,7 +50,10 @@ func ExampleAdaptFunc() {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest(http.MethodGet, "/", nil)
 	h.ServeHTTP(w, r)
+
 	res := w.Result()
+	defer res.Body.Close()
+
 	fmt.Printf("Status: %v\n", res.Status)
 	fmt.Printf("Cache-Control: %+v\n", res.Header.Get("Cache-Control"))
 	fmt.Printf("Content-Type: %v", res.Header.Get("Content-Type"))
@@ -57,13 +63,21 @@ func ExampleAdaptFunc() {
 	// Content-Type: application/json; charset=utf-8
 }
 
-type headersIn []struct {
-	key, value string
+func TestAdapt(t *testing.T) {
+	t.Parallel()
+
+	testAdapt(t, middleware.Adapt)
 }
 
-type headersWant map[string]string
+func TestAdaptFunc(t *testing.T) {
+	t.Parallel()
 
-func testAdapt(f interface{}, t *testing.T) {
+	testAdapt(t, middleware.AdaptFunc)
+}
+
+func testAdapt(t *testing.T, f interface{}) {
+	t.Helper()
+
 	cases := []struct {
 		in   headersIn
 		want headersWant
@@ -126,10 +140,20 @@ func testAdapt(f interface{}, t *testing.T) {
 	}
 }
 
-func TestAdapt(t *testing.T)     { testAdapt(middleware.Adapt, t) }
-func TestAdaptFunc(t *testing.T) { testAdapt(middleware.AdaptFunc, t) }
+type headersIn []struct {
+	key, value string
+}
 
-func benchmarkAdapt(n int, b *testing.B) {
+type headersWant map[string]string
+
+func BenchmarkAdapt(b *testing.B)      { benchmarkAdapt(b, 1) }
+func BenchmarkAdapt_10(b *testing.B)   { benchmarkAdapt(b, 10) }
+func BenchmarkAdapt_100(b *testing.B)  { benchmarkAdapt(b, 100) }
+func BenchmarkAdapt_1000(b *testing.B) { benchmarkAdapt(b, 1000) }
+
+func benchmarkAdapt(b *testing.B, n int) {
+	b.Helper()
+
 	h := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		_, err := w.Write([]byte("hello, world"))
 
@@ -160,8 +184,3 @@ func benchmarkAdapt(n int, b *testing.B) {
 		middleware.Adapt(h, adapters...).ServeHTTP(w, r)
 	}
 }
-
-func BenchmarkAdapt(b *testing.B)      { benchmarkAdapt(1, b) }
-func BenchmarkAdapt_10(b *testing.B)   { benchmarkAdapt(10, b) }
-func BenchmarkAdapt_100(b *testing.B)  { benchmarkAdapt(100, b) }
-func BenchmarkAdapt_1000(b *testing.B) { benchmarkAdapt(1000, b) }

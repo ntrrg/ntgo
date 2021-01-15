@@ -9,6 +9,9 @@ coverage.txt
 # Tools #
 #########
 
+# Delve
+debug.test
+
 # GNU Screen
 .screenrc
 

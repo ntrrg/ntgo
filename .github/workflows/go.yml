@@ -14,8 +14,7 @@ jobs:
         os:
           - ubuntu-latest
         go_version:
-          - "1.13"
-          - "1.14"
+          - "1.16"
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set up Go
@@ -25,31 +24,30 @@ jobs:
 
       - name: Set up tools
         run: |
-          export GO111MODULE="on"
-          go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.21.0
+          wget -qO "/tmp/golangci-lint-1.36.0-linux-amd64.tar.gz" 'https://github.com/golangci/golangci-lint/releases/download/v1.36.0/golangci-lint-1.36.0-linux-amd64.tar.gz'
+          tar -xf "/tmp/golangci-lint-1.36.0-linux-amd64.tar.gz" -C "/tmp/"
+          sudo cp "/tmp/golangci-lint-1.36.0-linux-amd64/golangci-lint" "/usr/bin/"
 
       - name: Get source code
         uses: actions/checkout@v2
 
-      - name: Lint
-        run: make lint
+      - name: Build
+        run: make build
 
       - name: Tests
         run: make test-race
-
-      - name: Code Analysis
-        run: |
-          export PATH=$PATH:$(go env GOPATH)/bin
-          make ca
 
       - name: Coverage
         run: |
           make coverage
           bash <(curl -s https://codecov.io/bash)
 
-      - name: Build
-        run: make build
+      #- name: Benchmarks
+      #  run: make benchmark
 
-      - name: Benchmarks
-        run: make benchmark
+      - name: Lint
+        run: make lint
+
+      - name: Code Analysis
+        run: make ca
 

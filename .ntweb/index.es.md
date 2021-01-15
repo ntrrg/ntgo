@@ -4,8 +4,6 @@ description: Un conjunto de paquetes Go.
 tags:
   - biblioteca
   - go
-toc: true
-comments: true
 ---
 
 [![GitHub Actions](https://github.com/ntrrg/ntgo/workflows/Go/badge.svg)](https://github.com/ntrrg/ntgo/actions?query=workflow:Go)
@@ -21,15 +19,7 @@ Como este es un proyecto personal y experimental, no se provee ningún tipo de
 garantía o compatibilidad.
 {{% /note %}}
 
-| Paquete | Estatus |
-| :-- | :-- |
-| `bytes` | ![API status](https://img.shields.io/badge/status-stable-brightgreen.svg) [![GoDoc](https://godoc.org/ntrrg.dev/go/ntgo/bytes?status.svg)](https://godoc.org/ntrrg.dev/go/ntgo/bytes) |
-| `reflect` | |
-| `reflect/arithmetic` | ![API status](https://img.shields.io/badge/status-stable-brightgreen.svg) [![GoDoc](https://godoc.org/ntrrg.dev/go/ntgo/reflect/arithmetic?status.svg)](https://godoc.org/ntrrg.dev/go/ntgo/reflect/arithmetic) |
-| `net` | |
-| `net/http` | ![API status](https://img.shields.io/badge/status-unstable-red.svg) [![GoDoc](https://godoc.org/ntrrg.dev/go/ntgo/net/http?status.svg)](https://godoc.org/ntrrg.dev/go/ntgo/net/http) |
-| `net/http/middleware` | ![API status](https://img.shields.io/badge/status-testing-yellow.svg) [![GoDoc](https://godoc.org/ntrrg.dev/go/ntgo/net/http/middleware?status.svg)](https://godoc.org/ntrrg.dev/go/ntgo/net/http/middleware) |
-| `os` | ![API status](https://img.shields.io/badge/status-stable-brightgreen.svg) [![GoDoc](https://godoc.org/ntrrg.dev/go/ntgo/os?status.svg)](https://godoc.org/ntrrg.dev/go/ntgo/os) |
+{{< import "packages.md" >}}
 
 # Soporte
 

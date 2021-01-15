@@ -6,7 +6,8 @@ package middleware
 import "net/http"
 
 // Adapter is a wrapper for http.Handler. Takes a http.Handler as argument and
-// creates a new one that may run code before and/or after calling the given.
+// creates a new one that may run code before and/or after calling the given
+// handler.
 type Adapter func(http.Handler) http.Handler
 
 // Adapt wraps a http.Handler into a list of Adapters. Takes a http.Handler
@@ -21,6 +22,9 @@ func Adapt(h http.Handler, a ...Adapter) http.Handler {
 }
 
 // AdaptFunc works as Adapt but for http.HandlerFunc.
-func AdaptFunc(h func(w http.ResponseWriter, r *http.Request), a ...Adapter) http.Handler {
+func AdaptFunc(
+	h func(w http.ResponseWriter, r *http.Request),
+	a ...Adapter,
+) http.Handler {
 	return Adapt(http.HandlerFunc(h), a...)
 }

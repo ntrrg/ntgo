@@ -17,8 +17,8 @@ wrapping.
 		return http.HandlerFunc(nh)
 	}
 
-When a set of adapters is used, the result is a sequence of wrappers and its
-execution flow depends in the order that the adapters were given.
+When multiple adapters are used, the result is a sequence of wrappers and its
+execution flow depends in the order that adapters were given.
 
 	Adapt(h, f1, f2, f3)
 
@@ -35,5 +35,30 @@ execution flow depends in the order that the adapters were given.
 6. f2 after code
 
 7. f1 after code
+
+Some adapters my require to change the behavior of the ResponseWriter. Since
+the underlying type of a ResponseWriter from the stdlib implements more than
+this interface (which is a bad design decision), simply wrapping it with a
+custom type will hide other interface implementations. This leads to several
+side effects during request processing and makes some middleware completely
+unusable.
+
+To solve this, AdaptResponseWriter must be used. Supported interfaces are:
+
+* http.Flusher
+
+* io.ReaderFrom
+
+Unsupported interfaces are:
+
+* http.CloseNotifier: this was deprecated in favor of Request.Context.
+
+* http.Hijacker: I don't like Websockets (or the way they are implemented) and
+hijacking HTTP is a hacky workaround (also, ResponseWriters for HTTP versions
+higher than 1.1 don't implement this interface).
+
+* http.Pusher: web browsers are deprecating HTTP/2 Server Push.
 */
 package middleware
+
+// API Status: testing

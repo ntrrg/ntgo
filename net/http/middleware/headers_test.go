@@ -12,6 +12,8 @@ import (
 )
 
 func TestAddHeader(t *testing.T) {
+	t.Parallel()
+
 	cases := []struct {
 		key    string
 		values []string
@@ -35,8 +37,10 @@ func TestAddHeader(t *testing.T) {
 		w := httptest.NewRecorder()
 		r := httptest.NewRequest(http.MethodHead, "/", nil)
 		h.ServeHTTP(w, r)
+
 		res := w.Result()
 		defer res.Body.Close()
+
 		header := res.Header[c.key]
 
 		if len(header) != len(c.values) {
@@ -46,42 +50,9 @@ func TestAddHeader(t *testing.T) {
 	}
 }
 
-func TestCache(t *testing.T) {
-	cases := []struct {
-		method, value, want string
-	}{
-		{
-			method: http.MethodGet,
-			value:  "max-age=3600, s-max-age=3600",
-			want:   "max-age=3600, s-max-age=3600",
-		},
-		{
-			method: http.MethodHead,
-			value:  "private, max-age=3600",
-			want:   "",
-		},
-	}
-
-	for i, c := range cases {
-		h := middleware.AdaptFunc(
-			func(w http.ResponseWriter, r *http.Request) {},
-			middleware.Cache(c.value),
-		)
-
-		w := httptest.NewRecorder()
-		r := httptest.NewRequest(c.method, "/", nil)
-		h.ServeHTTP(w, r)
-		res := w.Result()
-		defer res.Body.Close()
-		header := res.Header.Get("Cache-Control")
-
-		if header != c.want {
-			t.Errorf("TC#%v: 'Cache-Control' == %v, want: %v", i, header, c.want)
-		}
-	}
-}
-
 func TestDelHeader(t *testing.T) {
+	t.Parallel()
+
 	key := "X-Header"
 
 	h := middleware.AdaptFunc(
@@ -94,82 +65,18 @@ func TestDelHeader(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest(http.MethodHead, "/", nil)
 	h.ServeHTTP(w, r)
+
 	res := w.Result()
 	defer res.Body.Close()
-	header := res.Header.Get(key)
 
-	if header != "" {
+	if header := res.Header.Get(key); header != "" {
 		t.Errorf("The 'X-Header' header stills have values: %v", header)
 	}
 }
 
-func TestJSONRequest(t *testing.T) {
-	cases := []struct {
-		method, ct string
-		status     int
-	}{
-		{
-			method: http.MethodGet,
-			ct:     "application/json; charset=utf-8",
-			status: http.StatusMethodNotAllowed,
-		},
-		{
-			method: http.MethodPost,
-			ct:     "application/json; charset=utf-8",
-			status: http.StatusOK,
-		},
-		{
-			method: http.MethodPut,
-			ct:     "text/plain; charset=utf-8",
-			status: http.StatusUnsupportedMediaType,
-		},
-		{
-			method: http.MethodPatch,
-			ct:     "application/json",
-			status: http.StatusOK,
-		},
-		{
-			method: http.MethodDelete,
-			ct:     "text/plain; charset=utf-8",
-			status: http.StatusMethodNotAllowed,
-		},
-	}
-
-	for i, c := range cases {
-		h := middleware.AdaptFunc(
-			func(w http.ResponseWriter, r *http.Request) {},
-			middleware.JSONRequest(""),
-		)
-
-		w := httptest.NewRecorder()
-		r := httptest.NewRequest(c.method, "/", nil)
-		r.Header.Set("Content-Type", c.ct)
-		h.ServeHTTP(w, r)
-		res := w.Result().StatusCode
-
-		if res != c.status {
-			t.Errorf("TC#%v: got %v, want %v", i, res, c.status)
-		}
-	}
-}
-
-func TestJSONResponse(t *testing.T) {
-	h := middleware.AdaptFunc(
-		func(w http.ResponseWriter, r *http.Request) {},
-		middleware.JSONResponse(),
-	)
-
-	w := httptest.NewRecorder()
-	r := httptest.NewRequest(http.MethodGet, "/", nil)
-	h.ServeHTTP(w, r)
-	res := w.Result().Header.Get("Content-Type")
-
-	if res != "application/json; charset=utf-8" {
-		t.Errorf("Bad header value: %v", res)
-	}
-}
-
 func TestSetHeader(t *testing.T) {
+	t.Parallel()
+
 	h := middleware.AdaptFunc(
 		func(w http.ResponseWriter, r *http.Request) {},
 		middleware.SetHeader("X-Header", "Abc"),
@@ -178,9 +85,11 @@ func TestSetHeader(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest(http.MethodHead, "/", nil)
 	h.ServeHTTP(w, r)
-	res := w.Result().Header.Get("X-Header")
 
-	if res != "Abc" {
+	res := w.Result()
+	defer res.Body.Close()
+
+	if header := res.Header.Get("X-Header"); header != "Abc" {
 		t.Errorf("Bad header value, got %v, want %v", res, "Abc")
 	}
 }

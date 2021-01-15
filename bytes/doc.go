@@ -2,6 +2,8 @@
 // This source code was released under the MIT license.
 
 /*
-Package bytes implements functions for the manipulation of byte slices.
+Package bytes implements functions for manipulating byte slices.
 */
 package bytes
+
+// API Status: stable

@@ -5,46 +5,53 @@ package middleware
 
 import (
 	"compress/gzip"
+	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"strings"
 )
-
-type compressedResponseWriter struct {
-	http.ResponseWriter
-	io.WriteCloser
-}
-
-func (w compressedResponseWriter) Write(b []byte) (int, error) {
-	return w.WriteCloser.Write(b)
-}
 
 // Gzip compresses the response body. The compression level is given as an
 // integer value according to the compress/flate package.
 func Gzip(level int) Adapter {
 	return func(h http.Handler) http.Handler {
 		nh := func(w http.ResponseWriter, r *http.Request) {
-			if strings.Contains(r.Header.Get("Accept-Encoding"), "gzip") {
-				gz, err := gzip.NewWriterLevel(w, level)
+			wh := w.Header()
 
-				if err != nil {
-					log.Printf("[ERROR] Bad compression level: %v\n%v", level, err)
-				}
+			// Prevent proxy caches corruption
+			wh.Add("Vary", "Accept-Encoding")
 
-				gzw := compressedResponseWriter{w, gz}
-
-				defer func() {
-					if err := gzw.Close(); err != nil {
-						log.Printf("[ERROR] Can't close the GZIP writer.\n%v", err)
-					}
-				}()
-
-				w.Header().Set("Content-Encoding", "gzip")
-				h.ServeHTTP(gzw, r)
-			} else {
+			// Ignore requests from clients that don't support/want GZIP
+			if !strings.Contains(r.Header.Get("Accept-Encoding"), "gzip") {
 				h.ServeHTTP(w, r)
+				return
 			}
+
+			gz, err := gzip.NewWriterLevel(w, level)
+			if err != nil {
+				panic(fmt.Errorf("bad compression level: %w", err))
+			}
+
+			defer gz.Close()
+			wh.Set("Content-Encoding", "gzip")
+
+			wh["Content-Length"] = nil
+
+			aw := AdaptResponseWriter(w, ResponseWriterMethods{
+				Write: func(buf []byte) (int, error) {
+					return gz.Write(buf)
+				},
+
+				Flush: func() {
+					gz.Flush()
+				},
+
+				ReadFrom: func(src io.Reader) (int64, error) {
+					return io.Copy(gz, src)
+				},
+			})
+
+			h.ServeHTTP(aw, r)
 		}
 
 		return http.HandlerFunc(nh)

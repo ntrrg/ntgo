@@ -6,7 +6,7 @@ package arithmetic_test
 import (
 	"fmt"
 
-	a "go.ntrrg.dev/ntgo/reflect/arithmetic"
+	"go.ntrrg.dev/ntgo/reflect/arithmetic"
 )
 
 // BytesSum is a simple string implementation of arithmetic.Operander. Its
@@ -25,15 +25,15 @@ func Example() {
 	x := BytesSum("hello")
 	fmt.Println(x.Val())
 
-	fmt.Println(a.Add(x, BytesSum("world")))
-	fmt.Println(a.Sub(x, 32))
-	fmt.Println(a.Mul(x, "world"))
-	fmt.Println(a.Div(x, []byte{'M', 'A'}))
+	fmt.Println(arithmetic.Add(x, BytesSum("world")))
+	fmt.Println(arithmetic.Sub(x, 32))
+	fmt.Println(arithmetic.Mul(x, "world"))
+	fmt.Println(arithmetic.Div(x, []byte{'M', 'A'}))
 
-	fmt.Println(a.Add(x))
-	fmt.Println(a.Sub(x))
-	fmt.Println(a.Mul(x))
-	fmt.Println(a.Div(x))
+	fmt.Println(arithmetic.Add(x))
+	fmt.Println(arithmetic.Sub(x))
+	fmt.Println(arithmetic.Mul(x))
+	fmt.Println(arithmetic.Div(x))
 
 	// Output:
 	// 532

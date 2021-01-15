@@ -1,10 +1,12 @@
 module := $(shell go list -m)
-hugoPort := 1313
-godocPort := 6060
+PACKAGE ?= $(notdir $(module))
+HUGO_PORT ?= 1313
+GODOC_PORT ?= 6060
 
-goAllFiles := $(filter-out ./vendor/%, $(shell find . -iname "*.go" -type f))
-goSrcFiles := $(shell go list -f "{{ \$$path := .Dir }}{{ range .GoFiles }}{{ \$$path }}/{{ . }} {{ end }}" ./...)
-goTestFiles := $(shell go list -f "{{ \$$path := .Dir }}{{ range .TestGoFiles }}{{ \$$path }}/{{ . }} {{ end }}{{ range .XTestGoFiles }}{{ \$$path }}/{{ . }} {{ end }}" ./...)
+goAllFiles := $(shell find . -iname "*.go" -type f)
+goFiles := $(filter-out ./vendor/%, $(goAllFiles))
+goSrcFiles := $(shell go list -f '{{ range .GoFiles }}{{ $$.Dir }}/{{ . }} {{ end }}' ./...)
+goTestFiles := $(shell go list -f "{{ range .TestGoFiles }}{{ $$.Dir }}/{{ . }} {{ end }}{{ range .XTestGoFiles }}{{ $$.Dir }}/{{ . }} {{ end }}" ./...)
 
 .PHONY: all
 all: build
@@ -18,31 +20,36 @@ clean: clean-dev
 
 .PHONY: doc
 doc:
-	@echo "Go to http://localhost:$(hugoPort)/en/projects/$(basename $(module))/"
-	@echo "Ir a http://localhost:$(hugoPort)/es/projects/$(basename $(module))/"
+	@echo "Go to http://localhost:$(HUGO_PORT)/en/projects/$(PACKAGE)/"
 	@docker run --rm -it \
-		-e PORT=$(hugoPort) \
-		-p $(hugoPort):$(hugoPort) \
-		-v "$$PWD/.ntweb":/site/content/projects/$(basename $(module))/ \
-		ntrrg/ntweb:editing --port $(hugoPort)
+		-e PORT=$(HUGO_PORT) \
+		-p $(HUGO_PORT):$(HUGO_PORT) \
+		-v "$$PWD/.ntweb":/site/content/projects/$(PACKAGE)/ \
+		ntrrg/ntweb:editing --port $(HUGO_PORT)
 
-.PHONE: doc-go
-doc-go:
-	@echo "Go to http://localhost:$(godocPort)/pkg/$(module)/"
-	godoc -http :$(godocPort) -play
+.PHONE: godoc
+godoc:
+	@echo "Go to http://localhost:$(GODOC_PORT)/pkg/$(module)/"
+	godoc -http :$(GODOC_PORT) -play
 
 # Development
 
-CI_TARGET ?= ./...
+BENCHMARKS_FILE ?= benchmarsk.txt
 COVERAGE_FILE ?= coverage.txt
+TARGET_FUNC ?= .
+TARGET_PKG ?= ./...
 
 .PHONY: benchmark
 benchmark:
-	go test -v -bench . -benchmem -run none $(CI_TARGET)
+	go test -run none -bench "$(TARGET_FUNC)" -benchmem -v $(TARGET_PKG)
 
 .PHONY: ca
 ca:
 	golangci-lint run
+
+.PHONY: ca-fast
+ca-fast:
+	golangci-lint run --fast
 
 .PHONY: ci
 ci: test lint ca coverage benchmark build
@@ -55,37 +62,39 @@ clean-dev: clean
 	rm -rf $(COVERAGE_FILE)
 
 .PHONY: coverage
-coverage: $(COVERAGE_FILE)
-	go tool cover -func $<
+coverage:
+	go tool cover -func $(COVERAGE_FILE)
 
 .PHONY: coverage-web
-coverage-web: $(COVERAGE_FILE)
-	go tool cover -html $<
+coverage-web:
+	go tool cover -html $(COVERAGE_FILE)
 
 .PHONY: format
 format:
-	gofmt -s -w -l $(goAllFiles)
+	gofmt -s -w -l $(goFiles)
 
 .PHONY: lint
 lint:
-	gofmt -d -e -s $(goAllFiles)
+	gofmt -d -e -s $(goFiles)
 
 .PHONY: test
 test:
-	go test -v $(CI_TARGET)
+	go test \
+		-run "$(TARGET_FUNC)" \
+		-coverprofile $(COVERAGE_FILE) \
+		-v $(TARGET_PKG)
 
 .PHONY: test-race
 test-race:
-	go test -race -v $(CI_TARGET)
+	go test \
+		-run "$(TARGET_FUNC)" \
+		-coverprofile $(COVERAGE_FILE) \
+		-race -v $(TARGET_PKG)
 
 .PHONY: watch
 watch:
-	reflex -d "none" -r '\.go$$' -- $(MAKE) -s test lint
+	reflex -d "none" -r '\.go$$' -- $(MAKE) -s build test lint
 
 .PHONY: watch-race
 watch-race:
-	reflex -d "none" -r '\.go$$' -- $(MAKE) -s test-race lint
-
-$(COVERAGE_FILE): $(goSrcFiles) $(goTestFiles)
-	go test -coverprofile $@ $(CI_TARGET)
-
+	reflex -d "none" -r '\.go$$' -- $(MAKE) -s build test-race lint

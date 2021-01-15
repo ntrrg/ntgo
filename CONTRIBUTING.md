@@ -5,12 +5,17 @@ Any contribution to this project means implicitly that you accept the
 
 ## Requirements
 
+[Git]: https://git-scm.com/
 [Go]: https://golang.org/dl/
+
+* [Git][]
+* [Go][] >= 1.15
+
 [GolangCI Lint]: https://github.com/golangci/golangci-lint/releases
 
-* [Go][] >= 1.14
+**Optional:**
 
-* [GolangCI Lint][] >= 1.21
+* [GolangCI Lint][] >= 1.31
 
 ## Guidelines
 

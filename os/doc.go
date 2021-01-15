@@ -6,3 +6,5 @@ Package os provides a platform-independent interface to operating system
 functionality.
 */
 package os
+
+// API Status: stable

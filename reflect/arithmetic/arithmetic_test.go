@@ -1,13 +1,87 @@
 // Copyright 2018 Miguel Angel Rivera Notararigo. All rights reserved.
 // This source code was released under the MIT license.
 
-package arithmetic
+package arithmetic_test
 
 import (
 	"testing"
+
+	"go.ntrrg.dev/ntgo/reflect/arithmetic"
 )
 
-func TestGetVal(t *testing.T) {
+func TestAdd(t *testing.T) {
+	t.Parallel()
+
+	if arithmetic.Add() != 0 {
+		t.Errorf("Add() with zero operanders should be 0")
+	}
+
+	if arithmetic.Add(1) != 1 {
+		t.Errorf("Add() with one operander should be the same operander")
+	}
+}
+
+func TestDiv(t *testing.T) {
+	t.Parallel()
+
+	if arithmetic.Div() != 0 {
+		t.Errorf("Div() with zero operanders should be 0")
+	}
+
+	if arithmetic.Div(1) != 1 {
+		t.Errorf("Div() with one operander should be the same operander")
+	}
+}
+
+func TestEq(t *testing.T) {
+	t.Parallel()
+
+	if !arithmetic.Eq() || !arithmetic.Eq('M') ||
+		!arithmetic.Eq(true, 1, []byte{'M'}) ||
+		arithmetic.Eq(false, true, []byte{'M', 'A'}) ||
+		!arithmetic.Eq(false, 0, []byte{}, struct{}{}, func() {}) {
+		t.Errorf("equality is not working as it should")
+	}
+}
+
+func TestMul(t *testing.T) {
+	t.Parallel()
+
+	if arithmetic.Mul() != 0 {
+		t.Errorf("Mul() with zero operanders should be 0")
+	}
+
+	if arithmetic.Mul(1) != 1 {
+		t.Errorf("Mul() with one operander should be the same operander")
+	}
+}
+
+func TestNe(t *testing.T) {
+	t.Parallel()
+
+	if arithmetic.Ne() || arithmetic.Ne('M') ||
+		arithmetic.Ne(true, 1, []byte{'M'}) ||
+		!arithmetic.Ne(false, true, []byte{'M', 'A'}) ||
+		arithmetic.Ne(false, 0, []byte{}, struct{}{}, func() {}) {
+		t.Errorf("inequality is not working as it should")
+	}
+}
+
+func TestSub(t *testing.T) {
+	t.Parallel()
+
+	if arithmetic.Sub() != 0 {
+		t.Errorf("Sub() with zero operanders should be 0")
+	}
+
+	if arithmetic.Sub(1) != 1 {
+		t.Errorf("Sub() with one operander should be the same operander")
+	}
+}
+
+func TestVal(t *testing.T) {
+	t.Parallel()
+
 	cases := []struct {
 		in   interface{}
 		want float64
@@ -44,68 +118,10 @@ func TestGetVal(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		got := Val(c.in)
+		got := arithmetic.Val(c.in)
 
 		if got != c.want {
 			t.Errorf("%v == %v, want %v", c.in, got, c.want)
 		}
-	}
-}
-
-func TestAdd(t *testing.T) {
-	if Add() != 0 {
-		t.Errorf("Add() with zero operanders should be 0")
-	}
-
-	if Add(1) != 1 {
-		t.Errorf("Add() with one operander should be the same operander")
-	}
-}
-
-func TestDiv(t *testing.T) {
-	if Div() != 0 {
-		t.Errorf("Div() with zero operanders should be 0")
-	}
-
-	if Div(1) != 1 {
-		t.Errorf("Div() with one operander should be the same operander")
-	}
-}
-
-func TestEq(t *testing.T) {
-	if !Eq() || !Eq('M') ||
-		!Eq(true, 1, []byte{'M'}) ||
-		Eq(false, true, []byte{'M', 'A'}) ||
-		!Eq(false, 0, []byte{}, struct{}{}, func() {}) {
-		t.Errorf("equality is not working as it should")
-	}
-}
-
-func TestMul(t *testing.T) {
-	if Mul() != 0 {
-		t.Errorf("Mul() with zero operanders should be 0")
-	}
-
-	if Mul(1) != 1 {
-		t.Errorf("Mul() with one operander should be the same operander")
-	}
-}
-
-func TestNe(t *testing.T) {
-	if Ne() || Ne('M') ||
-		Ne(true, 1, []byte{'M'}) ||
-		!Ne(false, true, []byte{'M', 'A'}) ||
-		Ne(false, 0, []byte{}, struct{}{}, func() {}) {
-		t.Errorf("inequality is not working as it should")
-	}
-}
-
-func TestSub(t *testing.T) {
-	if Sub() != 0 {
-		t.Errorf("Sub() with zero operanders should be 0")
-	}
-
-	if Sub(1) != 1 {
-		t.Errorf("Sub() with one operander should be the same operander")
 	}
 }
