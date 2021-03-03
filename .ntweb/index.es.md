@@ -8,7 +8,7 @@ tags:
 
 [![GitHub Actions](https://github.com/ntrrg/ntgo/workflows/Go/badge.svg)](https://github.com/ntrrg/ntgo/actions?query=workflow:Go)
 [![codecov](https://codecov.io/gh/ntrrg/ntgo/branch/master/graph/badge.svg)](https://codecov.io/gh/ntrrg/ntgo)
-[![GoDoc](https://godoc.org/go.ntrrg.dev/ntgo?status.svg)](https://godoc.org/ntrrg.dev/go/sdb/pkg/sdb)
+[![Go Reference](https://pkg.go.dev/badge/go.ntrrg.dev/ntgo.svg)](https://pkg.go.dev/go.ntrrg.dev/ntgo)
 
 **ntgo** es un conjunto de paquetes Go que provee utilidades de red,
 implementaciones de estructuras de datos y herramientas usadas regularmente por
@@ -85,4 +85,6 @@ Trabando en este proyecto usamos:
 * [Mage](https://magefile.org/)
 
 * [Termux](https://termux.com)
+
+* [Alpine](https://alpinelinux.org/)
 
