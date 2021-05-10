@@ -34,7 +34,6 @@ godoc:
 
 # Development
 
-BENCHMARKS_FILE ?= benchmarsk.txt
 COVERAGE_FILE ?= coverage.txt
 TARGET_FUNC ?= .
 TARGET_PKG ?= ./...
@@ -52,10 +51,10 @@ ca-fast:
 	golangci-lint run --fast
 
 .PHONY: ci
-ci: test lint ca coverage benchmark build
+ci: test lint ca coverage build
 
 .PHONY: ci-race
-ci-race: test-race lint ca coverage benchmark build
+ci-race: test-race lint ca coverage build
 
 .PHONY: clean-dev
 clean-dev: clean
@@ -86,10 +85,10 @@ test:
 
 .PHONY: test-race
 test-race:
-	go test \
+	go test -race \
 		-run "$(TARGET_FUNC)" \
 		-coverprofile $(COVERAGE_FILE) \
-		-race -v $(TARGET_PKG)
+		-v $(TARGET_PKG)
 
 .PHONY: watch
 watch:
