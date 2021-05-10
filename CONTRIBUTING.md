@@ -9,13 +9,17 @@ Any contribution to this project means implicitly that you accept the
 [Go]: https://golang.org/dl/
 
 * [Git][]
-* [Go][] >= 1.15
-
-[GolangCI Lint]: https://github.com/golangci/golangci-lint/releases
+* [Go][] >= 1.16
 
 **Optional:**
 
-* [GolangCI Lint][] >= 1.31
+[GolangCI Lint]: https://github.com/golangci/golangci-lint/releases
+[GNU Make]: https://www.gnu.org/software/make/
+[reflex]: https://github.com/cespare/reflex
+
+* [GolangCI Lint][] >= 1.36
+* [GNU Make][] >= 4.3 (build tool)
+* [reflex][] >= 0.2 (filesystem watching)
 
 ## Guidelines
 

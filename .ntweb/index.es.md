@@ -25,7 +25,7 @@ garantía o compatibilidad.
 
 Si encuentra algún error o necesita ayuda, cree un issue en el [issue tracker](https://github.com/ntrrg/ntgo/issues).
 Si usar herramientas técnicas no es su estilo, puede enviarnos un correo
-electrónico a la dirección ntrrgx@gmail.com
+electrónico a la dirección support@ntrrg.dev.
 
 # Contribuir
 

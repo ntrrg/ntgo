@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [Unreleased]: https://github.com/ntrrg/ntgo/compare/v0.7.0...master
 ## [Unreleased][]
 
+### Added
+
+* `os/cmd`: New subpackage
+
 [0.7.0]: https://github.com/ntrrg/ntgo/compare/v0.6.0...v0.7.0
 ## [0.7.0][]
 
@@ -21,12 +25,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * `runtime`: `IsBigEndian` and `IsLittleEndian` functions
 * `bytes`: `BufferPool.AddWait` and `BufferPool.GetWait` methods
 * `os`: `Copy`, `CopyFile` and `CopyDir` functions
-* `os/unix`: New subpackage
 
 ### Changed
 
 * `net/http`: Use a single `ListenAndServe` method for `Server`
-* `os`: Move `Cp` to `os/unix`
 * Improve project structure
 
 [0.6.0]: https://github.com/ntrrg/ntgo/compare/v0.5.0...v0.6.0
@@ -40,6 +42,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 
 * `reflect/arithmetic`: Panics with zero operanders
+
+### Removed
+
+* `os`: `Cp` helper
 
 [0.5.0]: https://github.com/ntrrg/ntgo/compare/v0.4.1...v0.5.0
 ## [0.5.0][]
