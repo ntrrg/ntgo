@@ -5,12 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-[Unreleased]: https://github.com/ntrrg/ntgo/compare/v0.7.0...master
+[Unreleased]: https://github.com/ntrrg/ntgo/compare/v0.8.0...master
 ## [Unreleased][]
 
 ### Added
 
-* `os/cmd`: New subpackage
+* `io/fs`: New subpackage for file system operations
+* `os/bin`: New subpackage with UNIX like utilities
+
+[0.8.0]: https://github.com/ntrrg/ntgo/compare/v0.7.0...v0.8.0
+## [0.8.0][]
+
+### Added
+
+* `net/http`: `ListenAndServeUDS` and `ShutdownServerOn` functions
+* `os`: `GetenvOr` function
+
+### Removed
+
+* `net/http`: Remove `Server` since it provides an extra layer of abstraction
+  without enough advantages
 
 [0.7.0]: https://github.com/ntrrg/ntgo/compare/v0.6.0...v0.7.0
 ## [0.7.0][]

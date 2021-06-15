@@ -1,19 +1,21 @@
-module := $(shell go list -m)
+GO ?= go
+module := $(shell $(GO) list -m)
 PACKAGE ?= $(notdir $(module))
-HUGO_PORT ?= 1313
+
 GODOC_PORT ?= 6060
+HUGO_PORT ?= 1313
 
 goAllFiles := $(shell find . -iname "*.go" -type f)
 goFiles := $(filter-out ./vendor/%, $(goAllFiles))
-goSrcFiles := $(shell go list -f '{{ range .GoFiles }}{{ $$.Dir }}/{{ . }} {{ end }}' ./...)
-goTestFiles := $(shell go list -f "{{ range .TestGoFiles }}{{ $$.Dir }}/{{ . }} {{ end }}{{ range .XTestGoFiles }}{{ $$.Dir }}/{{ . }} {{ end }}" ./...)
+goSrcFiles := $(shell $(GO) list -f '{{ range .GoFiles }}{{ $$.Dir }}/{{ . }} {{ end }}' ./...)
+goTestFiles := $(shell $(GO) list -f "{{ range .TestGoFiles }}{{ $$.Dir }}/{{ . }} {{ end }}{{ range .XTestGoFiles }}{{ $$.Dir }}/{{ . }} {{ end }}" ./...)
 
 .PHONY: all
 all: build
 
 .PHONY: build
 build:
-	go build ./...
+	$(GO) build ./...
 
 .PHONY: clean
 clean: clean-dev
@@ -40,7 +42,7 @@ TARGET_PKG ?= ./...
 
 .PHONY: benchmark
 benchmark:
-	go test -run none -bench "$(TARGET_FUNC)" -benchmem -v $(TARGET_PKG)
+	$(GO) test -run none -bench "$(TARGET_FUNC)" -benchmem -v $(TARGET_PKG)
 
 .PHONY: ca
 ca:
@@ -50,23 +52,17 @@ ca:
 ca-fast:
 	golangci-lint run --fast
 
-.PHONY: ci
-ci: test lint ca coverage build
-
-.PHONY: ci-race
-ci-race: test-race lint ca coverage build
-
 .PHONY: clean-dev
 clean-dev: clean
 	rm -rf $(COVERAGE_FILE)
 
 .PHONY: coverage
 coverage:
-	go tool cover -func $(COVERAGE_FILE)
+	$(GO) tool cover -func $(COVERAGE_FILE)
 
 .PHONY: coverage-web
 coverage-web:
-	go tool cover -html $(COVERAGE_FILE)
+	$(GO) tool cover -html $(COVERAGE_FILE)
 
 .PHONY: format
 format:
@@ -78,22 +74,22 @@ lint:
 
 .PHONY: test
 test:
-	go test \
+	$(GO) test \
 		-run "$(TARGET_FUNC)" \
 		-coverprofile $(COVERAGE_FILE) \
 		-v $(TARGET_PKG)
 
 .PHONY: test-race
 test-race:
-	go test -race \
+	$(GO) test -race \
 		-run "$(TARGET_FUNC)" \
 		-coverprofile $(COVERAGE_FILE) \
 		-v $(TARGET_PKG)
 
 .PHONY: watch
 watch:
-	reflex -d "none" -r '\.go$$' -- $(MAKE) -s build test lint
+	reflex -d "none" -r '\.go$$' -- $(MAKE) -s test lint
 
 .PHONY: watch-race
 watch-race:
-	reflex -d "none" -r '\.go$$' -- $(MAKE) -s build test-race lint
+	reflex -d "none" -r '\.go$$' -- $(MAKE) -s test-race lint

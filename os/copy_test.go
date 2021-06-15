@@ -37,9 +37,7 @@ func TestCopy(t *testing.T) {
 		t.Fatalf("Copy failed to copy a valid file: %v", err)
 	}
 
-	src = dir
-	dst = dir + "2"
-
+	src, dst = dir, dir+"2"
 	if err := ntos.Copy(dst, src); err != nil {
 		t.Fatalf("Copy failed to copy a valid directory: %v", err)
 	}

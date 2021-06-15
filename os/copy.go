@@ -28,7 +28,8 @@ func Copy(dst, src string) error {
 }
 
 // CopyDir copies src content recursively into dst, if dst doesn't exists it
-// will be created. mode will be the new dst mode.
+// will be created. mode will be the new dst mode, its content will preserve
+// the origin mode.
 func CopyDir(dst, src string, mode os.FileMode) error {
 	if err := isInside(dst, src); err != nil {
 		return err
@@ -54,6 +55,30 @@ func CopyDir(dst, src string, mode os.FileMode) error {
 	}
 
 	return filepath.Walk(src, fn)
+}
+
+// CopyFile copies src content into dst, if dst exists it will be truncated.
+// mode will be the new dst mode.
+func CopyFile(dst, src string, mode os.FileMode) error {
+	from, err := os.Open(src)
+	if err != nil {
+		return NewCopyError(src, dst, "cannot open source file", err)
+	}
+
+	defer from.Close()
+
+	to, err := os.OpenFile(dst, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, mode)
+	if err != nil {
+		return NewCopyError(src, dst, "cannot open destination file", err)
+	}
+
+	defer to.Close()
+
+	if _, err = io.Copy(to, from); err != nil {
+		return NewCopyError(src, dst, "cannot copy data", err)
+	}
+
+	return nil
 }
 
 // CopyError records an error during a copy operation. If Err is nil, it means
@@ -88,30 +113,6 @@ func (e *CopyError) Error() string {
 // Unwrap allows to use functions from errors package over CopyError.
 func (e *CopyError) Unwrap() error {
 	return e.Err
-}
-
-// CopyFile copies src content into dst, if dst exists it will be truncated.
-// mode will be the new dst mode.
-func CopyFile(dst, src string, mode os.FileMode) error {
-	from, err := os.Open(src)
-	if err != nil {
-		return NewCopyError(src, dst, "cannot open source file", err)
-	}
-
-	defer from.Close()
-
-	to, err := os.OpenFile(dst, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, mode)
-	if err != nil {
-		return NewCopyError(src, dst, "cannot open destination file", err)
-	}
-
-	defer to.Close()
-
-	if _, err = io.Copy(to, from); err != nil {
-		return NewCopyError(src, dst, "cannot copy data", err)
-	}
-
-	return nil
 }
 
 func isInside(dst, src string) error {
