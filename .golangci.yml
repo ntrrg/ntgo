@@ -8,15 +8,27 @@ linters:
   disable:
     - depguard
     - exhaustivestruct
+    - gci
     - gochecknoglobals
     - gochecknoinits
+    - gocyclo
+    - godox
+    - goerr113
     - gofumpt
+    - golint
     - gomnd
     - ifshort
+    - interfacer
+    - maligned
     - nlreturn
+    - scopelint
     - unparam
     - unused
 linters-settings:
+  cyclop:
+    max-complexity: 10
+    package-average: 10.0
+    skip-tests: true
   errcheck:
     check-type-assertions: true
     check-blank: true
@@ -24,14 +36,10 @@ linters-settings:
     min-complexity: 10
   gocyclo:
     min-complexity: 10
-  golint:
-    min-confidence: 0
   govet:
     check-shadowing: true
   lll:
     line-length: 79
-  maligned:
-    suggest-new: true
   misspell:
     locale: US
   nestif:
@@ -48,11 +56,14 @@ linters-settings:
     enforce-err-cuddling: true
 issues:
   exclude-rules:
-    - path: _test\.go
+    - source: "^//"
       linters:
-        - gocyclo
+        - lll
+    - path: "_test\\.go"
+      linters:
+        - cyclop
+        - dupl
         - gocognit
-        - goerr113
         - forbidigo
         - funlen
         - lll

@@ -1,4 +1,4 @@
-name: Go
+name: CI
 on:
   push:
     branches:
@@ -8,13 +8,14 @@ on:
       - master
 jobs:
   ci:
-    name: CI
+    name: Integration
     strategy:
       matrix:
         os:
           - ubuntu-latest
         go_version:
-          - "1.16"
+          - "1.18"
+          - "1.19"
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set up Go
@@ -24,9 +25,9 @@ jobs:
 
       - name: Set up tools
         run: |
-          wget -qO "/tmp/golangci-lint-1.36.0-linux-amd64.tar.gz" 'https://github.com/golangci/golangci-lint/releases/download/v1.36.0/golangci-lint-1.36.0-linux-amd64.tar.gz'
-          tar -xf "/tmp/golangci-lint-1.36.0-linux-amd64.tar.gz" -C "/tmp/"
-          sudo cp "/tmp/golangci-lint-1.36.0-linux-amd64/golangci-lint" "/usr/bin/"
+          wget -qO "/tmp/golangci-lint-1.47.3-linux-amd64.tar.gz" 'https://github.com/golangci/golangci-lint/releases/download/v1.47.3/golangci-lint-1.47.3-linux-amd64.tar.gz'
+          tar -xf "/tmp/golangci-lint-1.47.3-linux-amd64.tar.gz" -C "/tmp/"
+          sudo cp "/tmp/golangci-lint-1.47.3-linux-amd64/golangci-lint" "/usr/bin/"
 
       - name: Get source code
         uses: actions/checkout@v2
@@ -39,11 +40,12 @@ jobs:
 
       - name: Coverage
         run: |
-          make coverage
+          make coverage-check
+          mv coverage-dev.txt coverage.txt
           bash <(curl -s https://codecov.io/bash)
 
       #- name: Benchmarks
-      #  run: make benchmark
+      #  run: make benchmark-check
 
       - name: Lint
         run: make lint

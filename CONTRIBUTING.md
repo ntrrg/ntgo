@@ -9,7 +9,7 @@ Any contribution to this project means implicitly that you accept the
 [Go]: https://golang.org/dl/
 
 * [Git][]
-* [Go][] >= 1.16
+* [Go][] >= 1.19
 
 **Optional:**
 
@@ -17,7 +17,7 @@ Any contribution to this project means implicitly that you accept the
 [GNU Make]: https://www.gnu.org/software/make/
 [reflex]: https://github.com/cespare/reflex
 
-* [GolangCI Lint][] >= 1.36
+* [GolangCI Lint][] >= 1.42
 * [GNU Make][] >= 4.3 (build tool)
 * [reflex][] >= 0.2 (filesystem watching)
 

@@ -1,5 +1,10 @@
 nogit-*
-coverage.txt
+*.prof
+*.test
+benchmarks-*.txt
+coverage-*.txt
+/vendor/
+go.work
 
 #######################
 # Frameworks and libs #

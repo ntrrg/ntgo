@@ -10,8 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-* `io/fs`: New subpackage for file system operations
-* `os/bin`: New subpackage with UNIX like utilities
+* `io/fs`: New package for file system operations
+* `os/bin`: New package with UNIX like utilities
+* `errors`: New package for error handling
 
 [0.8.0]: https://github.com/ntrrg/ntgo/compare/v0.7.0...v0.8.0
 ## [0.8.0][]
