@@ -106,7 +106,7 @@ func isValidCodeChar(r byte) bool {
 		return true
 	case r >= '0' && r <= '9':
 		return true
-	case r == '_' || r == '-':
+	case r == '_' || r == '-' || r == '.':
 		return true
 	default:
 		return false

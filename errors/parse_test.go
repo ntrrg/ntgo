@@ -14,7 +14,7 @@ import (
 func TestError_New(t *testing.T) {
 	t.Parallel()
 
-	code := "test-error-new"
+	code := "go.ntrrg.dev/ntgo/errors/test-error-new"
 	reason := "test Error.New"
 
 	err := nterrors.New(code, reason)

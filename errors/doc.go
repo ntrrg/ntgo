@@ -36,7 +36,7 @@
 //	reason    = unicode_value | byte_value .
 //	wrapped   = error | ( unicode_value | byte_value ) .
 //	code_text = code_char { code_char } .
-//	code_char = "a" … "z" | "0" … "9" | "_" | "-" .
+//	code_char = "a" … "z" | "0" … "9" | "_" | "-" | "." .
 //
 // ## Examples
 //
@@ -52,3 +52,5 @@
 //
 //	[net/http] can't start server: listen tcp :80: bind: address already in use
 package errors
+
+// API Status: stable

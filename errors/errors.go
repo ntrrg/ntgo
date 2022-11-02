@@ -9,7 +9,7 @@ import (
 )
 
 // Main error group.
-var Err = New("ntgo/errors", "")
+var Err = New("go.ntrrg.dev/ntgo/errors", "")
 
 // All reports if err matches all errors in targets.
 func All(err error, targets ...error) bool {
@@ -83,7 +83,7 @@ func Wrap(err, target error) error {
 	return fmt.Errorf("%v: %w", err, target)
 }
 
-// WrapAll wraps all given errors left to right.
+// WrapAll wraps all given errors right to left.
 func WrapAll(errs ...error) error {
 	var err error = nil
 
