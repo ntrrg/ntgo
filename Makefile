@@ -24,7 +24,6 @@ clean:
 
 BENCHMARK_COUNT ?= 1
 BENCHMARK_FILE ?= benchmarks-dev.txt
-BENCHMARK_WEB_FILE := $(shell mktemp -u)-$(PROJECT).html
 COVERAGE_FILE ?= coverage-dev.txt
 CPUPROFILE ?= cpu.prof
 MEMPROFILE ?= mem.prof
@@ -47,10 +46,12 @@ benchmark:
 benchmark-check: benchmarks.txt $(BENCHMARK_FILE)
 	benchstat "$<" "$(BENCHMARK_FILE)"
 
+benchmarkWebFile := $(shell mktemp -u)-$(PROJECT).html
+
 .PHONY: benchmark-web
 benchmark-web: benchmarks.txt $(BENCHMARK_FILE)
-	benchstat -html "$<" "$(BENCHMARK_FILE)" > "$(BENCHMARK_WEB_FILE)"
-	exo-open "$(BENCHMARK_WEB_FILE)"
+	benchstat -html "$<" "$(BENCHMARK_FILE)" > "$(benchmarkWebFile)"
+	exo-open "$(benchmarkWebFile)"
 
 define benchmarks_file
 	BENCHMARK_FILE="$(1)" $(MAKE) -s benchmark

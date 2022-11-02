@@ -35,3 +35,6 @@ Session.vim
 # MacOS
 .DS_Store
 
+# Windows
+*.nfo
+
