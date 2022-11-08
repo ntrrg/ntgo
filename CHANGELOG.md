@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 * `net/http`: Remove `Server` since it provides an extra layer of abstraction
   without enough advantages
+* `bytes`: Remove package
 
 [0.7.0]: https://github.com/ntrrg/ntgo/compare/v0.6.0...v0.7.0
 ## [0.7.0][]
