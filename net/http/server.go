@@ -19,7 +19,7 @@ func ListenAndServeUDS(s *http.Server, p string) error {
 		return fmt.Errorf("cannot create socket: %w", err)
 	}
 
-	return s.Serve(uds)
+	return s.Serve(uds) //nolint:wrapcheck
 }
 
 // ShutdownServerOn listen for sig signal and gracefully shuts down the given

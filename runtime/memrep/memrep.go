@@ -17,7 +17,7 @@ type Representation struct {
 }
 
 // Read creates a memory representation of x.
-func Read(x interface{}) Representation {
+func Read(x any) Representation {
 	p := (*[2]uintptr)(unsafe.Pointer(&x))[1] // Get interface data pointer.
 	v := reflect.ValueOf(x)
 	s := v.Type().Size()
@@ -29,8 +29,9 @@ func Read(x interface{}) Representation {
 	}
 }
 
-// ReadArray creates a memory representation of the underlying array of x.
-func ReadArray(x interface{}) Representation {
+// ReadArray creates a memory representation of the underlying array from the
+// given slice.
+func ReadArray(x any) Representation {
 	v := reflect.ValueOf(x)
 	s := v.Type().Elem().Size() * uintptr(v.Len())
 

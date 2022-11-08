@@ -54,7 +54,7 @@ func CopyDir(dst, src string, mode os.FileMode) error {
 		return CopyFile(dest, srcpath, fi.Mode())
 	}
 
-	return filepath.Walk(src, fn)
+	return filepath.Walk(src, fn) //nolint:wrapcheck
 }
 
 // CopyFile copies src content into dst, if dst exists it will be truncated.

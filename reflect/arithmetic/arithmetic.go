@@ -13,7 +13,7 @@ type Operander interface {
 }
 
 // Add gets any number of elements and returns their addition.
-func Add(operanders ...interface{}) float64 {
+func Add(operanders ...any) float64 {
 	if len(operanders) < 1 {
 		return 0
 	}
@@ -28,7 +28,7 @@ func Add(operanders ...interface{}) float64 {
 }
 
 // Div gets any number of elements and returns their division.
-func Div(operanders ...interface{}) float64 {
+func Div(operanders ...any) float64 {
 	if len(operanders) < 1 {
 		return 0
 	}
@@ -43,7 +43,7 @@ func Div(operanders ...interface{}) float64 {
 }
 
 // Eq gets any number of elements and checks if they are equals.
-func Eq(operanders ...interface{}) bool {
+func Eq(operanders ...any) bool {
 	if len(operanders) < 2 {
 		return true
 	}
@@ -60,7 +60,7 @@ func Eq(operanders ...interface{}) bool {
 }
 
 // Mul gets any number of elements and returns their multiplication.
-func Mul(operanders ...interface{}) float64 {
+func Mul(operanders ...any) float64 {
 	if len(operanders) < 1 {
 		return 0
 	}
@@ -75,7 +75,7 @@ func Mul(operanders ...interface{}) float64 {
 }
 
 // Ne gets any number of elements and checks if they are differents.
-func Ne(operanders ...interface{}) bool {
+func Ne(operanders ...any) bool {
 	if len(operanders) < 2 {
 		return false
 	}
@@ -96,7 +96,7 @@ func Ne(operanders ...interface{}) bool {
 }
 
 // Sub gets any number of elements and returns their subtraction.
-func Sub(operanders ...interface{}) float64 {
+func Sub(operanders ...any) float64 {
 	if len(operanders) < 1 {
 		return 0
 	}
@@ -112,14 +112,14 @@ func Sub(operanders ...interface{}) float64 {
 
 // Val extracts the arithmetic representation from any type. It is ruled by the
 // value extraction rules.
-func Val(operander interface{}) float64 {
+func Val(operander any) float64 {
 	if x, ok := operander.(Operander); ok {
 		return x.Val()
 	}
 
 	x := reflect.ValueOf(operander)
 
-	// nolint:exhaustive
+	//nolint:exhaustive
 	switch x.Kind() {
 	case reflect.Bool:
 		if x.Bool() {

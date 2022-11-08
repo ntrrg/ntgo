@@ -170,7 +170,7 @@ func TestAdaptedRW_Flush(t *testing.T) {
 	w := http.ResponseWriter(rw)
 	aw := middleware.AdaptResponseWriter(w, middleware.ResponseWriterMethods{})
 
-	aw.(http.Flusher).Flush()
+	aw.(http.Flusher).Flush() //nolint:forcetypeassert
 
 	aw = middleware.AdaptResponseWriter(w, middleware.ResponseWriterMethods{
 		Flush: func() {
@@ -178,7 +178,7 @@ func TestAdaptedRW_Flush(t *testing.T) {
 		},
 	})
 
-	aw.(http.Flusher).Flush()
+	aw.(http.Flusher).Flush() //nolint:forcetypeassert
 
 	if rw.Flushed == true {
 		t.Error("adapted ResponseWriter is not using adapted Flush")
@@ -236,7 +236,7 @@ type adaptedRWF struct {
 }
 
 func (aw *adaptedRWF) Flush() {
-	aw.ResponseWriter.(http.Flusher).Flush()
+	aw.ResponseWriter.(http.Flusher).Flush() //nolint:forcetypeassert
 }
 
 type adaptedRWRF struct {
@@ -252,7 +252,7 @@ type adaptedRWFRF struct {
 }
 
 func (aw *adaptedRWFRF) Flush() {
-	aw.ResponseWriter.(http.Flusher).Flush()
+	aw.ResponseWriter.(http.Flusher).Flush() //nolint:forcetypeassert
 }
 
 func (aw *adaptedRWFRF) ReadFrom(src io.Reader) (int64, error) {

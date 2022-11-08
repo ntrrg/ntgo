@@ -70,10 +70,10 @@ var parseCases = []struct {
 
 	{
 		label: "WrappedSeparatorBegining",
-		msg:   "[wrapped-separator_begining] : test wrapped separator",
+		msg:   "[wrapped-separator_beginning] : test wrapped separator",
 
 		want: nterrors.New(
-			"wrapped-separator_begining", ": test wrapped separator",
+			"wrapped-separator_beginning", ": test wrapped separator",
 		),
 	},
 
@@ -211,13 +211,13 @@ func TestMustParse(t *testing.T) {
 						return
 					}
 
-					got, _ := erri.(error) // nolint:errcheck
+					got, _ := erri.(error) //nolint:errcheck
 					if !nterrors.All(got, append(c.want, nterrors.ErrInvalidSyntax)...) {
 						t.Errorf("invalid error. got: %q, want: %q", got, c.want)
 					}
 				}()
 
-				nterrors.MustParse(c.msg)
+				nterrors.MustParse(c.msg) //nolint:errcheck
 				t.Error("succeed")
 			})
 		}
@@ -260,7 +260,7 @@ func TestParse(t *testing.T) {
 			t.Run(c.label, func(t *testing.T) {
 				t.Parallel()
 
-				_, got := nterrors.Parse(c.msg)
+				_, got := nterrors.Parse(c.msg) //nolint:errcheck
 				if got == nil {
 					t.Fatal("succeed")
 				}
@@ -334,7 +334,7 @@ func BenchmarkParse(b *testing.B) {
 			var err error
 
 			for i := 0; i < b.N; i++ {
-				_, err = nterrors.Parse(c.msg)
+				_, err = nterrors.Parse(c.msg) //nolint:errcheck
 				if err != nil {
 					b.Fatal(err)
 				}

@@ -8,7 +8,7 @@ import (
 	"fmt"
 )
 
-// Main error group.
+// Err is the main error group for this package.
 var Err = New("go.ntrrg.dev/ntgo/errors", "")
 
 // All reports if err matches all errors in targets.
@@ -39,12 +39,12 @@ func Any(err error, targets ...error) bool {
 
 // Of reports if err was created from target.
 func Of(err, target error) bool {
-	e, ok := err.(*Error) // nolint:errorlint
+	e, ok := err.(*Error) //nolint:errorlint
 	if !ok {
 		return false
 	}
 
-	t, ok := target.(*Error) // nolint:errorlint
+	t, ok := target.(*Error) //nolint:errorlint
 	if !ok {
 		return false
 	}
@@ -54,7 +54,7 @@ func Of(err, target error) bool {
 
 // UnwrapAll returns all wrapped errors by err.
 func UnwrapAll(err error) []error {
-	var errs []error = nil
+	var errs []error
 
 	for e := errors.Unwrap(err); e != nil; e = errors.Unwrap(e) {
 		errs = append(errs, e)
@@ -73,7 +73,7 @@ func Wrap(err, target error) error {
 		return err
 	}
 
-	switch e := err.(type) {
+	switch e := err.(type) { //nolint:errorlint
 	case *Error:
 		return e.Wrap(target)
 	case interface{ Wrap(error) error }:
@@ -85,7 +85,7 @@ func Wrap(err, target error) error {
 
 // WrapAll wraps all given errors right to left.
 func WrapAll(errs ...error) error {
-	var err error = nil
+	var err error
 
 	for i := len(errs) - 1; i >= 0; i-- {
 		err = Wrap(errs[i], err)

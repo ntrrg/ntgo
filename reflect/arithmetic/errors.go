@@ -1,11 +1,11 @@
 // Copyright 2022 Miguel Angel Rivera Notararigo. All rights reserved.
 // This source code was released under the MIT license.
 
-package ntgo
+package arithmetic
 
 import (
-	nterrors "go.ntrrg.dev/ntgo/errors"
+	ntreflect "go.ntrrg.dev/ntgo/reflect"
 )
 
 // Err is the main error group for this package.
-var Err = nterrors.New("go.ntrrg.dev/ntgo", "")
+var Err = ntreflect.Err.New("arithmetic", "airhtmetic package errors")

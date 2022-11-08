@@ -100,7 +100,7 @@ func (e *Error) New(code, reason string) *Error {
  * Helpers
  */
 
-func isValidCodeChar(r byte) bool {
+func isValidCodeChar(r byte) bool { //nolint:gocognit
 	switch {
 	case r >= 'a' && r <= 'z':
 		return true
@@ -140,7 +140,7 @@ func parseCode(msg string) (code, nmsg string, err error) {
 	return "", msg, ErrNoCode
 }
 
-func parseReason(msg string) (reason, nmsg string, err error) {
+func parseReason(msg string) (reason, nmsg string, err error) { //nolint:gocognit,lll
 	if len(msg) < len(" x") {
 		return "", msg, ErrNoReason
 	}

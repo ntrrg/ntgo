@@ -40,7 +40,7 @@ func (e *Error) Error() string {
 // its code, which means, Is will return true even if their reason is
 // different, but their code is the same.
 func (e *Error) Is(target error) bool {
-	t, ok := target.(*Error) // nolint:errorlint
+	t, ok := target.(*Error) //nolint:errorlint
 	if !ok {
 		return false
 	}
@@ -67,6 +67,7 @@ func (e *Error) Unwrap() error {
 func (e *Error) Wrap(err error) *Error {
 	ne := e.Clone()
 	ne.err = err
+
 	return ne
 }
 

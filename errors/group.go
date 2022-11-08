@@ -13,7 +13,7 @@ func Group(errs ...error) error {
 // Split separates a error group. If err is not a group, a single element slice
 // containing it will be returned.
 func Split(errs error) []error {
-	g, ok := errs.(*group) // nolint:errorlint
+	g, ok := errs.(*group) //nolint:errorlint
 	if !ok {
 		return []error{errs}
 	}

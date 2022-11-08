@@ -31,6 +31,8 @@ TARGET_FUNC ?= .
 TARGET_PKG ?= ./...
 WATCH_TARGET ?= test
 
+benchmarkWebFile := $(shell mktemp -u)-$(PROJECT).html
+
 ifneq "$(notdir $(TARGET_PKG))" "..."
 	profileFlags := -cpuprofile "$(CPUPROFILE)" -memprofile "$(MEMPROFILE)"
 endif
@@ -45,8 +47,6 @@ benchmark:
 .PHONY: benchmark-check
 benchmark-check: benchmarks.txt $(BENCHMARK_FILE)
 	benchstat "$<" "$(BENCHMARK_FILE)"
-
-benchmarkWebFile := $(shell mktemp -u)-$(PROJECT).html
 
 .PHONY: benchmark-web
 benchmark-web: benchmarks.txt $(BENCHMARK_FILE)

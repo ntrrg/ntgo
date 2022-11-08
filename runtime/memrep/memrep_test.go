@@ -1,6 +1,7 @@
 // Copyright 2021 Miguel Angel Rivera Notararigo. All rights reserved.
 // This source code was released under the MIT license.
 
+//go:build !race
 // +build !race
 
 package memrep_test
@@ -20,11 +21,12 @@ func TestRead(t *testing.T) {
 	// predict its values, therefor setting want.Bytes to nil means that this
 	// property will be ignored while comparing.
 	cases := []struct {
-		in   interface{}
+		in   any
 		want memrep.Representation
 	}{
 		{
 			in: true,
+
 			want: memrep.Representation{
 				Type:  "bool",
 				Size:  1,
@@ -34,6 +36,7 @@ func TestRead(t *testing.T) {
 
 		{
 			in: int32(32),
+
 			want: memrep.Representation{
 				Type:  "int32",
 				Size:  4,
@@ -43,6 +46,7 @@ func TestRead(t *testing.T) {
 
 		{
 			in: int64(0),
+
 			want: memrep.Representation{
 				Type:  "int64",
 				Size:  8,
@@ -51,7 +55,8 @@ func TestRead(t *testing.T) {
 		},
 
 		{
-			in: [...]byte{'h', 'e', 'l', 'l', 'o'},
+			in: [5]byte{'h', 'e', 'l', 'l', 'o'},
+
 			want: memrep.Representation{
 				Type:  "[5]uint8",
 				Size:  5,
@@ -61,6 +66,7 @@ func TestRead(t *testing.T) {
 
 		{
 			in: "hello, world",
+
 			want: memrep.Representation{
 				Type:  "string",
 				Size:  16,
@@ -70,6 +76,7 @@ func TestRead(t *testing.T) {
 
 		{
 			in: []byte("hello, world"),
+
 			want: memrep.Representation{
 				Type:  "[]uint8",
 				Size:  24,
@@ -79,6 +86,7 @@ func TestRead(t *testing.T) {
 
 		{
 			in: customStruct{a: true, b: 8, c: 16, d: 32, e: 64},
+
 			want: memrep.Representation{
 				Type:  "memrep_test.customStruct",
 				Size:  16,
@@ -88,6 +96,7 @@ func TestRead(t *testing.T) {
 
 		{
 			in: &customStruct{},
+
 			want: memrep.Representation{
 				Type:  "*memrep_test.customStruct",
 				Size:  ntruntime.WordSize(),
@@ -101,6 +110,7 @@ func TestRead(t *testing.T) {
 				Size:  1,
 				Bytes: []byte{1},
 			},
+
 			want: memrep.Representation{
 				Type:  "memrep.Representation",
 				Size:  48,
@@ -153,6 +163,7 @@ func TestReadArray(t *testing.T) {
 	t.Parallel()
 
 	in := []rune("hello, world!")
+
 	want := memrep.Representation{
 		Type:  "array from []int32",
 		Size:  52,

@@ -10,7 +10,7 @@ import (
 	ntruntime "go.ntrrg.dev/ntgo/runtime"
 )
 
-func TestIsBigEndian(t *testing.T) {
+func TestEndianess(t *testing.T) {
 	t.Parallel()
 
 	var want bool
@@ -23,21 +23,10 @@ func TestIsBigEndian(t *testing.T) {
 	}
 
 	if ntruntime.IsBigEndian() != want {
-		t.Errorf("IsBigEndian() returns false in a big-endian system")
+		t.Errorf("IsBigEndian returns false in a big-endian system")
 	}
-}
 
-func TestIsLittleEndian(t *testing.T) {
-	t.Parallel()
-
-	var want bool
-
-	switch {
-	case runtime.GOOS == "linux" && runtime.GOARCH == "s390x":
-		want = false
-	default:
-		want = true
-	}
+	want = !want
 
 	if ntruntime.IsLittleEndian() != want {
 		t.Errorf("IsLittleEndian() returns false in a little-endian system")
@@ -57,9 +46,7 @@ func TestWordSize(t *testing.T) {
 	}
 
 	if got := ntruntime.WordSize(); got != want {
-		t.Errorf(
-			"WordSize() returns invalid word size. got: %v, want: %v",
-			got, want,
-		)
+		msg := "WordSize returns invalid word size. got: %d, want: %d"
+		t.Errorf(msg, got, want)
 	}
 }

@@ -164,7 +164,7 @@ func TestOf(t *testing.T) {
 func TestWrapping(t *testing.T) {
 	t.Parallel()
 
-	var err error = nil
+	var err error
 
 	if errs := nterrors.UnwrapAll(err); len(errs) != 0 {
 		t.Errorf("unwrapped errors from nil. got: %q", errs)

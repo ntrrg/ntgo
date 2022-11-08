@@ -13,11 +13,11 @@ func TestAdd(t *testing.T) {
 	t.Parallel()
 
 	if arithmetic.Add() != 0 {
-		t.Errorf("Add() with zero operanders should be 0")
+		t.Errorf("Add with zero operanders should be 0")
 	}
 
 	if arithmetic.Add(1) != 1 {
-		t.Errorf("Add() with one operander should be the same operander")
+		t.Errorf("Add with one operander should be the same operander")
 	}
 }
 
@@ -25,11 +25,11 @@ func TestDiv(t *testing.T) {
 	t.Parallel()
 
 	if arithmetic.Div() != 0 {
-		t.Errorf("Div() with zero operanders should be 0")
+		t.Errorf("Div with zero operanders should be 0")
 	}
 
 	if arithmetic.Div(1) != 1 {
-		t.Errorf("Div() with one operander should be the same operander")
+		t.Errorf("Div with one operander should be the same operander")
 	}
 }
 
@@ -48,11 +48,11 @@ func TestMul(t *testing.T) {
 	t.Parallel()
 
 	if arithmetic.Mul() != 0 {
-		t.Errorf("Mul() with zero operanders should be 0")
+		t.Errorf("Mul with zero operanders should be 0")
 	}
 
 	if arithmetic.Mul(1) != 1 {
-		t.Errorf("Mul() with one operander should be the same operander")
+		t.Errorf("Mul with one operander should be the same operander")
 	}
 }
 
@@ -71,11 +71,11 @@ func TestSub(t *testing.T) {
 	t.Parallel()
 
 	if arithmetic.Sub() != 0 {
-		t.Errorf("Sub() with zero operanders should be 0")
+		t.Errorf("Sub with zero operanders should be 0")
 	}
 
 	if arithmetic.Sub(1) != 1 {
-		t.Errorf("Sub() with one operander should be the same operander")
+		t.Errorf("Sub with one operander should be the same operander")
 	}
 }
 
@@ -83,7 +83,7 @@ func TestVal(t *testing.T) {
 	t.Parallel()
 
 	cases := []struct {
-		in   interface{}
+		in   any
 		want float64
 	}{
 		{true, 1},

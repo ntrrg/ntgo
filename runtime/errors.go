@@ -1,11 +1,11 @@
 // Copyright 2022 Miguel Angel Rivera Notararigo. All rights reserved.
 // This source code was released under the MIT license.
 
-package ntgo
+package runtime
 
 import (
-	nterrors "go.ntrrg.dev/ntgo/errors"
+	"go.ntrrg.dev/ntgo"
 )
 
 // Err is the main error group for this package.
-var Err = nterrors.New("go.ntrrg.dev/ntgo", "")
+var Err = ntgo.Err.New("runtime", "runtime packege errors")

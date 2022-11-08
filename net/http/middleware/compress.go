@@ -39,7 +39,7 @@ func Gzip(level int) Adapter {
 
 			aw := AdaptResponseWriter(w, ResponseWriterMethods{
 				Write: func(buf []byte) (int, error) {
-					return gz.Write(buf)
+					return gz.Write(buf) //nolint:wrapcheck
 				},
 
 				Flush: func() {
@@ -47,7 +47,7 @@ func Gzip(level int) Adapter {
 				},
 
 				ReadFrom: func(src io.Reader) (int64, error) {
-					return io.Copy(gz, src)
+					return io.Copy(gz, src) //nolint:wrapcheck
 				},
 			})
 

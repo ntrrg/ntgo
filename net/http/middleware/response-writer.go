@@ -73,7 +73,7 @@ func (aw *adaptedRW) Write(p []byte) (int, error) {
 		return aw.m.Write(p)
 	}
 
-	return aw.w.Write(p)
+	return aw.w.Write(p) //nolint:wrapcheck
 }
 
 func (aw *adaptedRW) WriteHeader(statusCode int) {
@@ -93,8 +93,7 @@ func (aw *adaptedRW) Flush() {
 		return
 	}
 
-	// nolint:errcheck
-	f := aw.w.(http.Flusher)
+	f := aw.w.(http.Flusher) //nolint:errcheck,forcetypeassert
 	f.Flush()
 }
 
@@ -105,10 +104,9 @@ func (aw *adaptedRW) ReadFrom(r io.Reader) (int64, error) {
 		return aw.m.ReadFrom(r)
 	}
 
-	// nolint:errcheck
-	rf := aw.w.(io.ReaderFrom)
+	rf := aw.w.(io.ReaderFrom) //nolint:errcheck,forcetypeassert
 
-	return rf.ReadFrom(r)
+	return rf.ReadFrom(r) //nolint:wrapcheck
 }
 
 // IsAdaptedResponseWriter reports if the given http.ResponseWriter were
